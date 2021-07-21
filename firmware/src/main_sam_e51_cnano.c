@@ -83,12 +83,12 @@ static uint8_t uartTxBuffer[100] = {0};
 static void EIC_User_Handler(uintptr_t context)
 {
     changeTempSamplingRate = true;
-    DplBrk_SetBrake (DplBrk_GetBrake() + 1000u);
+    DplBrk_SetBrake (DplBrk_GetBrake() + 1u);
 }
 
 static void EIC_User_Handler_Board_Switch(uintptr_t context)
 {
-    DplBrk_SetBrake (DplBrk_GetBrake() - 1000u);
+    DplBrk_SetBrake (DplBrk_GetBrake() - 1u);
 }
 
 static void rtcEventHandler (RTC_TIMER32_INT_MASK intCause, uintptr_t context)
@@ -134,7 +134,9 @@ int main ( void )
         while (1)
         {}
     }
-            
+    
+    TCC0_REGS->TCC_CC[2] = 14990;
+    
     while ( true )
     {        
         if ((isRTCExpired == true) && (true == isUSARTTxComplete))

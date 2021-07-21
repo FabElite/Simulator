@@ -44,6 +44,11 @@ uint32_t DplBrk_Init(void)
 
 void DplBrk_SetBrake(uint32_t zBrake)
 {
+    if (zBrake > DPLBRK_MAX_BRAKE)
+    {
+        zBrake = DPLBRK_MAX_BRAKE;
+    }
+    
     TCC0_REGS->TCC_CC[2] = zBrake;
 }
 

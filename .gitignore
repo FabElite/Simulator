@@ -7,8 +7,9 @@
 node_modules/
 dist/
 firmware/sam_e51_cnano.X/.generated_files
-firmware/sam_e51_cnano.X/dist/sam_e51_cnano/debug
 hex
+firmware/sam_e51_cnano.X/dist
+
 
 # file compilati in c
 *.o
