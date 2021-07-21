@@ -54,11 +54,15 @@
 #include <string.h>
 #include "definitions.h"                // SYS function prototypes
 
+#include "DplBrk.h"
+#include "DplSpd.h"
+#include "DplSYSTICK.h"
+
 /* RTC Time period match values for input clock of 1 KHz */
-#define PERIOD_500MS                            512
-#define PERIOD_1S                               1024
-#define PERIOD_2S                               2048
-#define PERIOD_4S                               4096
+#define PERIOD_500MS                            (512)
+#define PERIOD_1S                               (1024)
+#define PERIOD_2S                               (2048)
+#define PERIOD_4S                               (4096)
 
 typedef enum
 {
@@ -73,17 +77,18 @@ static const char timeouts[4][20] = {"500 milliSeconds", "1 Second",  "2 Seconds
 static volatile bool isRTCExpired = false;
 static volatile bool changeTempSamplingRate = false;
 static volatile bool isUSARTTxComplete = true;
+static volatile uint32_t g_tick = 0;
 static uint8_t uartTxBuffer[100] = {0};
 
 static void EIC_User_Handler(uintptr_t context)
 {
     changeTempSamplingRate = true;
-    TCC0_REGS->TCC_CC[2] += 1000U;
+    DplBrk_SetBrake (DplBrk_GetBrake() + 1000u);
 }
 
 static void EIC_User_Handler_Board_Switch(uintptr_t context)
 {
-    TCC0_REGS->TCC_CC[2] -= 1000U;
+    DplBrk_SetBrake (DplBrk_GetBrake() - 1000u);
 }
 
 static void rtcEventHandler (RTC_TIMER32_INT_MASK intCause, uintptr_t context)
@@ -111,22 +116,32 @@ int main ( void )
     uint8_t uartLocalTxBuffer[100] = {0};
 
     /* Initialize all modules */
-    SYS_Initialize ( NULL );
+    SYS_Initialize (NULL);
+    DplSYSTICK_Init();
+    
     DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, usartDmaChannelHandler, 0);
     EIC_CallbackRegister(EIC_PIN_2,EIC_User_Handler, 0);
     EIC_CallbackRegister(EIC_PIN_15,EIC_User_Handler_Board_Switch, 0);
     RTC_Timer32CallbackRegister(rtcEventHandler, 0);
-    
     sprintf((char*)uartTxBuffer, "Toggling LED at 500 milliseconds rate \r\n");
     RTC_Timer32Start();
-    TCC0_PWMStart();
-    while ( true )
+    DplBrk_Init();
+    DplSpd_Init();
+    
+    
+    if (SCB_GetFPUType() != 1)
     {
+        while (1)
+        {}
+    }
+            
+    while ( true )
+    {        
         if ((isRTCExpired == true) && (true == isUSARTTxComplete))
         {
             isRTCExpired = false;
             isUSARTTxComplete = false;
-            LED0_Toggle();
+            //LED0_Toggle();
             DMAC_ChannelTransfer(DMAC_CHANNEL_0, uartTxBuffer, \
                     (const void *)&(SERCOM5_REGS->USART_INT.SERCOM_DATA), \
                     strlen((const char*)uartTxBuffer));

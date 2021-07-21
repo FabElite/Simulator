@@ -77,8 +77,7 @@ void EIC_Initialize (void)
         /* Wait for sync */
     }
 
-    /* EIC is clocked by ultra low power clock */
-    EIC_REGS->EIC_CTRLA |= (uint8_t)EIC_CTRLA_CKSEL_Msk;
+    /* EIC is by default clocked by GCLK */
 
     /* NMI Control register */
 
@@ -86,14 +85,14 @@ void EIC_Initialize (void)
     EIC_REGS->EIC_CONFIG[0] =  EIC_CONFIG_SENSE0_NONE  |
                               EIC_CONFIG_SENSE1_NONE  |
                               EIC_CONFIG_SENSE2_RISE | EIC_CONFIG_FILTEN2_Msk |
-                              EIC_CONFIG_SENSE3_NONE  |
+                              EIC_CONFIG_SENSE3_BOTH | EIC_CONFIG_FILTEN3_Msk |
                               EIC_CONFIG_SENSE4_NONE  |
                               EIC_CONFIG_SENSE5_NONE  |
                               EIC_CONFIG_SENSE6_NONE  |
                               EIC_CONFIG_SENSE7_NONE  ;
 
     /* Interrupt sense type and filter control for EXTINT channels 8 to 15 */
-    EIC_REGS->EIC_CONFIG[1] =  EIC_CONFIG_SENSE0_NONE 
+    EIC_REGS->EIC_CONFIG[1] =  EIC_CONFIG_SENSE0_BOTH | EIC_CONFIG_FILTEN0_Msk
          |  EIC_CONFIG_SENSE1_NONE  
          |  EIC_CONFIG_SENSE2_NONE  
          |  EIC_CONFIG_SENSE3_NONE  
@@ -112,13 +111,13 @@ void EIC_Initialize (void)
     EIC_REGS->EIC_DPRESCALER = EIC_DPRESCALER_PRESCALER0(0UL) | EIC_DPRESCALER_PRESCALER1(0UL) ;
 
     /* External Interrupt enable*/
-    EIC_REGS->EIC_INTENSET = 0x8004U;
+    EIC_REGS->EIC_INTENSET = 0x800cU;
 
     /* Callbacks for enabled interrupts */
     eicCallbackObject[0].eicPinNo = EIC_PIN_MAX;
     eicCallbackObject[1].eicPinNo = EIC_PIN_MAX;
     eicCallbackObject[2].eicPinNo = EIC_PIN_2;
-    eicCallbackObject[3].eicPinNo = EIC_PIN_MAX;
+    eicCallbackObject[3].eicPinNo = EIC_PIN_3;
     eicCallbackObject[4].eicPinNo = EIC_PIN_MAX;
     eicCallbackObject[5].eicPinNo = EIC_PIN_MAX;
     eicCallbackObject[6].eicPinNo = EIC_PIN_MAX;
@@ -168,6 +167,28 @@ void EIC_EXTINT_2_InterruptHandler(void)
     if ((eicCallbackObject[2].callback != NULL))
     {
         eicCallbackObject[2].callback(eicCallbackObject[2].context);
+    }
+
+}
+void EIC_EXTINT_3_InterruptHandler(void)
+{
+    /* Clear interrupt flag */
+    EIC_REGS->EIC_INTFLAG = (1UL << 3);
+    /* Find any associated callback entries in the callback table */
+    if ((eicCallbackObject[3].callback != NULL))
+    {
+        eicCallbackObject[3].callback(eicCallbackObject[3].context);
+    }
+
+}
+void EIC_EXTINT_8_InterruptHandler(void)
+{
+    /* Clear interrupt flag */
+    EIC_REGS->EIC_INTFLAG = (1UL << 8);
+    /* Find any associated callback entries in the callback table */
+    if ((eicCallbackObject[8].callback != NULL))
+    {
+        eicCallbackObject[8].callback(eicCallbackObject[8].context);
     }
 
 }

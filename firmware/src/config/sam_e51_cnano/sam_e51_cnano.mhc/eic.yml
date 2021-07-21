@@ -48,13 +48,27 @@ children:
       children:
       - type: User
         attributes: {value: 'true'}
+  - type: Boolean
+    attributes: {id: EIC_CHAN_3}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'true'}
+  - type: Boolean
+    attributes: {id: EIC_CHAN_8}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
   - type: KeyValueSet
     attributes: {id: EIC_CLKSEL}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: Boolean
     attributes: {id: EIC_CONFIG_FILTEN_13}
     children:
@@ -94,6 +108,32 @@ children:
       children:
       - type: User
         attributes: {value: 'true'}
+  - type: Boolean
+    attributes: {id: EIC_CONFIG_FILTEN_3}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'true'}
+  - type: Boolean
+    attributes: {id: EIC_CONFIG_FILTEN_8}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'true'}
   - type: KeyValueSet
     attributes: {id: EIC_CONFIG_SENSE_13}
     children:
@@ -115,6 +155,20 @@ children:
       children:
       - type: User
         attributes: {value: '1'}
+  - type: KeyValueSet
+    attributes: {id: EIC_CONFIG_SENSE_3}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '3'}
+  - type: KeyValueSet
+    attributes: {id: EIC_CONFIG_SENSE_8}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '3'}
   - type: Hex
     attributes: {id: EIC_DEBOUNCEN}
     children:
@@ -161,6 +215,24 @@ children:
       children:
       - type: User
         attributes: {value: 'true'}
+  - type: Boolean
+    attributes: {id: EIC_DEBOUNCEN_3}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
+  - type: Boolean
+    attributes: {id: EIC_DEBOUNCEN_8}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
   - type: Hex
     attributes: {id: EIC_EXTINTEO}
     children:
@@ -168,13 +240,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: eic, value: '0'}
+  - type: Boolean
+    attributes: {id: EIC_EXTINTEO_8}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
   - type: Hex
     attributes: {id: EIC_INT}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: eic, value: '32772'}
+        attributes: {id: eic, value: '32780'}
   - type: Comment
     attributes: {id: EIC_INTERRUPT_ENABLE_COMMENT}
     children:
@@ -205,6 +284,20 @@ children:
       children:
       - type: User
         attributes: {value: 'true'}
+  - type: Boolean
+    attributes: {id: EIC_INT_3}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'true'}
+  - type: Boolean
+    attributes: {id: EIC_INT_8}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'true'}
   - type: Menu
     attributes: {id: EIC_MENU15}
     children:
@@ -223,5 +316,14 @@ children:
         attributes: {id: visible}
         children:
         - {type: Value, value: 'true'}
+  - type: Menu
+    attributes: {id: EIC_MENU3}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
 - type: ElementPosition
-  attributes: {x: '31', y: '160', id: eic}
+  attributes: {x: '30', y: '160', id: eic}

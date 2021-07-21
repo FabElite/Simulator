@@ -129,6 +129,8 @@ void SYS_Initialize ( void* data )
     CLOCK_Initialize();
 
     
+
+
     EVSYS_Initialize();
 
     TCC0_PWMInitialize();

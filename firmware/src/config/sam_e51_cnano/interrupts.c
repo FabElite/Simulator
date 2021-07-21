@@ -96,7 +96,6 @@ extern void SUPC_BODDET_Handler        ( void ) __attribute__((weak, alias("Dumm
 extern void WDT_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void EIC_EXTINT_0_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void EIC_EXTINT_1_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler")));
-extern void EIC_EXTINT_3_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void EIC_EXTINT_4_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void EIC_EXTINT_5_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void EIC_EXTINT_6_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler")));
@@ -239,7 +238,7 @@ const H3DeviceVectors exception_table=
     .pfnEIC_EXTINT_0_Handler       = EIC_EXTINT_0_Handler,
     .pfnEIC_EXTINT_1_Handler       = EIC_EXTINT_1_Handler,
     .pfnEIC_EXTINT_2_Handler       = EIC_EXTINT_2_InterruptHandler,
-    .pfnEIC_EXTINT_3_Handler       = EIC_EXTINT_3_Handler,
+    .pfnEIC_EXTINT_3_Handler       = EIC_EXTINT_3_InterruptHandler,
     .pfnEIC_EXTINT_4_Handler       = EIC_EXTINT_4_Handler,
     .pfnEIC_EXTINT_5_Handler       = EIC_EXTINT_5_Handler,
     .pfnEIC_EXTINT_6_Handler       = EIC_EXTINT_6_Handler,

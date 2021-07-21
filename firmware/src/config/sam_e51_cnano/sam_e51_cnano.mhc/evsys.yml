@@ -480,5 +480,19 @@ children:
       children:
       - type: Dynamic
         attributes: {id: eic, value: 'false'}
+  - type: Boolean
+    attributes: {id: GENERATOR_EIC_EXTINT_3_ACTIVE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: eic, value: 'false'}
+  - type: Boolean
+    attributes: {id: GENERATOR_EIC_EXTINT_8_ACTIVE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: eic, value: 'false'}
 - type: ElementPosition
   attributes: {x: '180', y: '20', id: evsys}

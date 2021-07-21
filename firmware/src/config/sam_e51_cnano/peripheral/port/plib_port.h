@@ -65,6 +65,15 @@
 // *****************************************************************************
 // *****************************************************************************
 
+/*** Macros for GPIO_PA08 pin ***/
+#define GPIO_PA08_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 8U))
+#define GPIO_PA08_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 8U))
+#define GPIO_PA08_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 8U))
+#define GPIO_PA08_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 8U))
+#define GPIO_PA08_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 8U))
+#define GPIO_PA08_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 8U)) & 0x01U)
+#define GPIO_PA08_PIN                  PORT_PIN_PA08
+
 /*** Macros for LED0 pin ***/
 #define LED0_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 14U))
 #define LED0_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 14U))

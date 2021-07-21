@@ -13,13 +13,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 513D2E5CC48FCB06BE946AB7D57E998E
-- generatedChecksum: 9FAC47ED8F34B6B4F1925CDCD5AADE6C
+- generatedChecksum: 298C08D623B4EC0D00FB4FB16B478168
   logicalPath: config/sam_e51_cnano
   name: interrupts.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 9FAC47ED8F34B6B4F1925CDCD5AADE6C
+  userChecksum: 298C08D623B4EC0D00FB4FB16B478168
 - generatedChecksum: 6513F2461B8F476B68CA73906086047F
   logicalPath: config/sam_e51_cnano
   name: libc_syscalls.c
@@ -55,13 +55,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 194BFD69FD3A5DEC4E3C6F427AC59A07
-- generatedChecksum: F519F52107D811548B18F6FFF8B0A8E5
+- generatedChecksum: AD6FFCB73A02C7E019972FDF56FFB228
   logicalPath: config/sam_e51_cnano/peripheral/eic
   name: plib_eic.c
   physicalPath: peripheral/eic
   security: NON_SECURE
   type: SOURCE
-  userChecksum: F519F52107D811548B18F6FFF8B0A8E5
+  userChecksum: AD6FFCB73A02C7E019972FDF56FFB228
 - generatedChecksum: C3ECDED3D6301DB0DE622293ED615D21
   logicalPath: config/sam_e51_cnano/peripheral/evsys
   name: plib_evsys.c
@@ -69,13 +69,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: C3ECDED3D6301DB0DE622293ED615D21
-- generatedChecksum: B14E5BFBB9123198255DF3DA9061CECB
+- generatedChecksum: 44FE17711035C2327CEDEDE065ABFF7A
   logicalPath: config/sam_e51_cnano/peripheral/nvic
   name: plib_nvic.c
   physicalPath: peripheral/nvic
   security: NON_SECURE
   type: SOURCE
-  userChecksum: B14E5BFBB9123198255DF3DA9061CECB
+  userChecksum: 44FE17711035C2327CEDEDE065ABFF7A
 - generatedChecksum: 57E1F9EA5E404569BFC1A3629AEC05F2
   logicalPath: config/sam_e51_cnano/peripheral/nvmctrl
   name: plib_nvmctrl.c
@@ -83,13 +83,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 57E1F9EA5E404569BFC1A3629AEC05F2
-- generatedChecksum: F924C44AADCFC5BC75EDE1EF67D53A5F
+- generatedChecksum: 760D53D570AAC1A535D9402D8001413C
   logicalPath: config/sam_e51_cnano/peripheral/port
   name: plib_port.c
   physicalPath: peripheral/port
   security: NON_SECURE
   type: SOURCE
-  userChecksum: EB45D164FFC2C939BA73255975068739
+  userChecksum: 760D53D570AAC1A535D9402D8001413C
 - generatedChecksum: 3C6977BD8087BCB0FED16E277D13A74E
   logicalPath: config/sam_e51_cnano/peripheral/rtc
   name: plib_rtc_timer.c
@@ -174,6 +174,48 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: D6EB92C731CE8E50D09C42F441E2FAFF
+- generatedChecksum: 4676B69F25222A88D495A692BE83FF28
+  logicalPath: packs/CMSIS/CMSIS/DSP/Include
+  name: arm_common_tables.h
+  physicalPath: ../../packs/CMSIS/CMSIS/DSP/Include
+  security: NON_SECURE
+  type: HEADER
+  userChecksum: 4676B69F25222A88D495A692BE83FF28
+- generatedChecksum: FBDA24A460BB14E99AB26B7683F92C6E
+  logicalPath: packs/CMSIS/CMSIS/DSP/Include
+  name: arm_const_structs.h
+  physicalPath: ../../packs/CMSIS/CMSIS/DSP/Include
+  security: NON_SECURE
+  type: HEADER
+  userChecksum: FBDA24A460BB14E99AB26B7683F92C6E
+- generatedChecksum: 0117E73ABB81ECEF1B9E625D31B2B84C
+  logicalPath: packs/CMSIS/CMSIS/DSP/Include
+  name: arm_helium_utils.h
+  physicalPath: ../../packs/CMSIS/CMSIS/DSP/Include
+  security: NON_SECURE
+  type: HEADER
+  userChecksum: 0117E73ABB81ECEF1B9E625D31B2B84C
+- generatedChecksum: F093F68D5A1CFEDFB75B1C39DC3BC82B
+  logicalPath: packs/CMSIS/CMSIS/DSP/Include
+  name: arm_math.h
+  physicalPath: ../../packs/CMSIS/CMSIS/DSP/Include
+  security: NON_SECURE
+  type: HEADER
+  userChecksum: F093F68D5A1CFEDFB75B1C39DC3BC82B
+- generatedChecksum: A8AD1E112DC46DFB43A2E447BFB7AD56
+  logicalPath: packs/CMSIS/CMSIS/DSP/Include
+  name: arm_mve_tables.h
+  physicalPath: ../../packs/CMSIS/CMSIS/DSP/Include
+  security: NON_SECURE
+  type: HEADER
+  userChecksum: A8AD1E112DC46DFB43A2E447BFB7AD56
+- generatedChecksum: 6CFBA8C30BC1CD3FDD61B50821EC7F2A
+  logicalPath: packs/CMSIS/CMSIS/DSP/Include
+  name: arm_vec_math.h
+  physicalPath: ../../packs/CMSIS/CMSIS/DSP/Include
+  security: NON_SECURE
+  type: HEADER
+  userChecksum: 6CFBA8C30BC1CD3FDD61B50821EC7F2A
 - generatedChecksum: 01B82424BC59A54620F7E9E0DB808EBB
   logicalPath: packs/CMSIS/CMSIS/Core/Include
   name: cachel1_armv7.h
@@ -454,13 +496,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 4693BBF4AEC1A855609768D5BD4708F8
-- generatedChecksum: 99712180ED497CC315F57BCE94A37C51
+- generatedChecksum: 1186F4C627F545AA7E2A6DBE1485095E
   logicalPath: config/sam_e51_cnano
   name: interrupts.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: 99712180ED497CC315F57BCE94A37C51
+  userChecksum: 1186F4C627F545AA7E2A6DBE1485095E
 - generatedChecksum: BC7DDF48FB0F859F260CF0E020CAEAED
   logicalPath: packs/ATSAME51J20A_DFP/component
   name: mclk.h
@@ -587,13 +629,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 17B4E969FEF64548F99710BE00445133
-- generatedChecksum: 63FEF8C3BE8223F134EDBBB4D019E617
+- generatedChecksum: 85A70192725C990A1C356DD35384D5F7
   logicalPath: config/sam_e51_cnano/peripheral/eic
   name: plib_eic.h
   physicalPath: peripheral/eic
   security: NON_SECURE
   type: HEADER
-  userChecksum: 63FEF8C3BE8223F134EDBBB4D019E617
+  userChecksum: 85A70192725C990A1C356DD35384D5F7
 - generatedChecksum: CCAEF942C66AF995876DFD85CEFF611F
   logicalPath: config/sam_e51_cnano/peripheral/evsys
   name: plib_evsys.h
@@ -615,13 +657,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: FD895019D50FEFCD49D89FCE2B0D9BBB
-- generatedChecksum: 3B7BE62DFF2260546619F1620DA4FB8E
+- generatedChecksum: 8F1BFFD39A33FAF677C9787537E4CAE9
   logicalPath: config/sam_e51_cnano/peripheral/port
   name: plib_port.h
   physicalPath: peripheral/port
   security: NON_SECURE
   type: HEADER
-  userChecksum: 3B7BE62DFF2260546619F1620DA4FB8E
+  userChecksum: 8F1BFFD39A33FAF677C9787537E4CAE9
 - generatedChecksum: BE830E46647CD89C924E8BDA8C9F8936
   logicalPath: config/sam_e51_cnano/peripheral/rtc
   name: plib_rtc.h
@@ -1015,8 +1057,17 @@ files:
   type: LINKER
   userChecksum: 4B08166850609F8EE7BEEA5932408C5F
 format_version: v1.0
-libraries: []
+libraries:
+- name: libarm_cortexM4lf_math.a
+  path: ../../packs/CMSIS/CMSIS/DSP/Lib/GCC
+  security: NON_SECURE
 settings:
+- append: true
+  category: C32
+  delimiter: ;
+  key: extra-include-directories
+  security: NON_SECURE
+  value: ../src/packs/CMSIS/CMSIS/DSP/Include/
 - append: true
   category: C32
   delimiter: ;
@@ -1041,6 +1092,12 @@ settings:
   key: preprocessor-macros
   security: NON_SECURE
   value: ''
+- append: true
+  category: C32CPP
+  delimiter: ;
+  key: extra-include-directories
+  security: NON_SECURE
+  value: ../src/packs/CMSIS/CMSIS/DSP/Include/
 - append: true
   category: C32CPP
   delimiter: ;
