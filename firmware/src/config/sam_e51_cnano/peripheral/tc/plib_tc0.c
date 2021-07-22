@@ -81,11 +81,11 @@ void TC0_CaptureInitialize( void )
     }
 
     /* Configure counter mode, prescaler, standby & on demand mode */
-    TC0_REGS->COUNT16.TC_CTRLA = TC_CTRLA_MODE_COUNT16 | TC_CTRLA_PRESCALER_DIV1 | TC_CTRLA_PRESCSYNC_PRESC
+    TC0_REGS->COUNT16.TC_CTRLA = TC_CTRLA_MODE_COUNT16 | TC_CTRLA_PRESCALER_DIV16 | TC_CTRLA_PRESCSYNC_PRESC
                                   | TC_CTRLA_CAPTEN0_Msk | TC_CTRLA_CAPTEN1_Msk  ;
 
 
-    TC0_REGS->COUNT16.TC_EVCTRL = (uint16_t)(TC_EVCTRL_EVACT_PWP | TC_EVCTRL_TCEI_Msk);
+    TC0_REGS->COUNT16.TC_EVCTRL = (uint16_t)(TC_EVCTRL_EVACT_PWP | TC_EVCTRL_TCEI_Msk | TC_EVCTRL_MCEO0_Msk);
 
     /* Clear all interrupt flags */
     TC0_REGS->COUNT16.TC_INTFLAG = (uint8_t)TC_INTFLAG_Msk;
@@ -120,7 +120,7 @@ void TC0_CaptureStop( void )
 
 uint32_t TC0_CaptureFrequencyGet( void )
 {
-    return (uint32_t)(60000000U);
+    return (uint32_t)(3750000U);
 }
 
 void TC0_CaptureCommandSet(TC_COMMAND command)

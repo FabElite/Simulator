@@ -82,13 +82,31 @@ static uint8_t uartTxBuffer[100] = {0};
 
 static void EIC_User_Handler(uintptr_t context)
 {
-    changeTempSamplingRate = true;
-    DplBrk_SetBrake (DplBrk_GetBrake() + 1u);
+    //changeTempSamplingRate = true;
+    //DplBrk_SetBrake (DplBrk_GetBrake() + 1u);
 }
 
 static void EIC_User_Handler_Board_Switch(uintptr_t context)
 {
-    DplBrk_SetBrake (DplBrk_GetBrake() - 1u);
+    DplBrk_SetBrake (DplBrk_GetBrake() - 100u);
+}
+
+static void TC0_test_handler(TC_CAPTURE_STATUS zboh, uintptr_t context)
+{
+    static int y_test0,y_test1, counter;
+
+    if (counter >=100)
+    {
+        y_test0 = TC0_Capture16bitChannel0Get();
+        y_test1 = TC0_Capture16bitChannel1Get();
+        if (y_test0 == 1 && y_test1 == 1)
+        {
+            __NOP();
+        }
+        sprintf((char*)uartTxBuffer, "Val0 %d | Val1 %d\r\n", (int) (((float)y_test0*(float)32000)/(float)120), (int) (((float)y_test1*(float)32000)/(float)120));
+        counter=0;
+    }
+    counter++;
 }
 
 static void rtcEventHandler (RTC_TIMER32_INT_MASK intCause, uintptr_t context)
@@ -117,8 +135,8 @@ int main ( void )
 
     /* Initialize all modules */
     SYS_Initialize (NULL);
-    DplSYSTICK_Init();
     
+    DplSYSTICK_Init();
     DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, usartDmaChannelHandler, 0);
     EIC_CallbackRegister(EIC_PIN_2,EIC_User_Handler, 0);
     EIC_CallbackRegister(EIC_PIN_15,EIC_User_Handler_Board_Switch, 0);
@@ -127,6 +145,8 @@ int main ( void )
     RTC_Timer32Start();
     DplBrk_Init();
     DplSpd_Init();
+    TC0_CaptureCallbackRegister(TC0_test_handler, 0);
+    TC0_CaptureStart();
     
     
     if (SCB_GetFPUType() != 1)
@@ -135,10 +155,10 @@ int main ( void )
         {}
     }
     
-    TCC0_REGS->TCC_CC[2] = 14990;
+    TCC0_REGS->TCC_CC[2] = 7500;
     
     while ( true )
-    {        
+    {       
         if ((isRTCExpired == true) && (true == isUSARTTxComplete))
         {
             isRTCExpired = false;
@@ -183,6 +203,7 @@ int main ( void )
                     strlen((const char*)uartLocalTxBuffer));
             sprintf((char*)uartTxBuffer, "Toggling LED at %s rate \r\n", &timeouts[(uint8_t)tempSampleRate][0]);
         }
+
     }
 
     /* Execution should not come here during normal operation */

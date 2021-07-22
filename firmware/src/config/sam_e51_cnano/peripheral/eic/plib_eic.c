@@ -84,9 +84,9 @@ void EIC_Initialize (void)
     /* Interrupt sense type and filter control for EXTINT channels 0 to 7*/
     EIC_REGS->EIC_CONFIG[0] =  EIC_CONFIG_SENSE0_NONE  |
                               EIC_CONFIG_SENSE1_NONE  |
-                              EIC_CONFIG_SENSE2_RISE | EIC_CONFIG_FILTEN2_Msk |
+                              EIC_CONFIG_SENSE2_HIGH  |
                               EIC_CONFIG_SENSE3_BOTH | EIC_CONFIG_FILTEN3_Msk |
-                              EIC_CONFIG_SENSE4_NONE  |
+                              EIC_CONFIG_SENSE4_BOTH  |
                               EIC_CONFIG_SENSE5_NONE  |
                               EIC_CONFIG_SENSE6_NONE  |
                               EIC_CONFIG_SENSE7_NONE  ;
@@ -106,6 +106,8 @@ void EIC_Initialize (void)
     /* Debouncer enable */
     EIC_REGS->EIC_DEBOUNCEN = 0x8004U;
 
+    /* Event Control Output enable */
+    EIC_REGS->EIC_EVCTRL = 0x4U;
 
     /* Debouncer Setting */
     EIC_REGS->EIC_DPRESCALER = EIC_DPRESCALER_PRESCALER0(0UL) | EIC_DPRESCALER_PRESCALER1(0UL) ;
@@ -178,6 +180,17 @@ void EIC_EXTINT_3_InterruptHandler(void)
     if ((eicCallbackObject[3].callback != NULL))
     {
         eicCallbackObject[3].callback(eicCallbackObject[3].context);
+    }
+
+}
+void EIC_EXTINT_4_InterruptHandler(void)
+{
+    /* Clear interrupt flag */
+    EIC_REGS->EIC_INTFLAG = (1UL << 4);
+    /* Find any associated callback entries in the callback table */
+    if ((eicCallbackObject[4].callback != NULL))
+    {
+        eicCallbackObject[4].callback(eicCallbackObject[4].context);
     }
 
 }

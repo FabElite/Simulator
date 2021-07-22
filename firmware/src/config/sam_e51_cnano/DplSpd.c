@@ -27,7 +27,6 @@
 #define PWM_SPEED_MAX_VALUE      (1000)
 
 int global_data;
-uint32_t g_tick;
 uint32_t g_pwm_measured_period_us;
 uint32_t g_pwm_input_period_us = DEFAULT_PWM_INPUT_PERIOD;
 float g_pwm_speed_rpm;
@@ -42,7 +41,7 @@ static void EIC_User_Handler_PWM_Speed_Input(uintptr_t pcontext);
 static void EIC_User_Handler_PWM_Speed_Input(uintptr_t pcontext)
 {    
     static bool y_old_pin_state = false;
-    static uint32_t y_last_t_rising = false;
+    static uint64_t y_last_t_rising = false;
     
     if (PORT_PinRead(PORT_PIN_PA03) == true)
     {
@@ -57,7 +56,7 @@ static void EIC_User_Handler_PWM_Speed_Input(uintptr_t pcontext)
     else if(y_old_pin_state == true)
     {
         y_old_pin_state = false;
-        g_pwm_speed_rpm  = ( (usTicks - y_last_t_rising) * PWM_SPEED_MAX_VALUE ) / g_pwm_input_period_us;
+        g_pwm_speed_rpm  = ( (uint64_t)(usTicks - y_last_t_rising) * PWM_SPEED_MAX_VALUE ) / g_pwm_input_period_us;
         if (g_pwm_speed_rpm > PWM_SPEED_MAX_VALUE)
         {
           g_pwm_speed_rpm = PWM_SPEED_MAX_VALUE;
