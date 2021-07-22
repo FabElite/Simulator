@@ -56,3 +56,5 @@ Thumbs.db
 *.mov
 *.wmv
 
+/firmware/sam_e51_cnano.X/nbproject/Makefile-genesis.properties
+/firmware/src/config/sam_e51_cnano/harmony-manifest-success.yml

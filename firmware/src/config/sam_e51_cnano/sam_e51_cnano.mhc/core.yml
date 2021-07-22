@@ -414,28 +414,28 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: eic, value: 'true'}
+        attributes: {id: eic, value: 'false'}
   - type: Boolean
     attributes: {id: EIC_EXTINT_2_INTERRUPT_ENABLE_UPDATE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: String
     attributes: {id: EIC_EXTINT_2_INTERRUPT_HANDLER}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: eic, value: EIC_EXTINT_2_InterruptHandler}
+        attributes: {id: eic, value: EIC_EXTINT_2_Handler}
   - type: Boolean
     attributes: {id: EIC_EXTINT_2_INTERRUPT_HANDLER_LOCK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: eic, value: 'true'}
+        attributes: {id: eic, value: 'false'}
   - type: Boolean
     attributes: {id: EIC_EXTINT_3_INTERRUPT_ENABLE}
     children:
@@ -470,28 +470,28 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: eic, value: 'false'}
+        attributes: {id: eic, value: 'true'}
   - type: Boolean
     attributes: {id: EIC_EXTINT_4_INTERRUPT_ENABLE_UPDATE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
   - type: String
     attributes: {id: EIC_EXTINT_4_INTERRUPT_HANDLER}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: eic, value: EIC_EXTINT_4_Handler}
+        attributes: {id: eic, value: EIC_EXTINT_4_InterruptHandler}
   - type: Boolean
     attributes: {id: EIC_EXTINT_4_INTERRUPT_HANDLER_LOCK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: eic, value: 'false'}
+        attributes: {id: eic, value: 'true'}
   - type: Boolean
     attributes: {id: EIC_EXTINT_8_INTERRUPT_ENABLE}
     children:
@@ -1040,21 +1040,21 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
   - type: String
     attributes: {id: NVIC_14_0_HANDLER}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: EIC_EXTINT_2_InterruptHandler}
+        attributes: {id: core, value: EIC_EXTINT_2_Handler}
   - type: Boolean
     attributes: {id: NVIC_14_0_HANDLER_LOCK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
   - type: Boolean
     attributes: {id: NVIC_15_0_ENABLE}
     children:
@@ -1082,21 +1082,21 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: String
     attributes: {id: NVIC_16_0_HANDLER}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: EIC_EXTINT_4_Handler}
+        attributes: {id: core, value: EIC_EXTINT_4_InterruptHandler}
   - type: Boolean
     attributes: {id: NVIC_16_0_HANDLER_LOCK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: Boolean
     attributes: {id: NVIC_20_0_ENABLE}
     children:
@@ -1644,12 +1644,54 @@ children:
       - type: User
         attributes: {value: ''}
   - type: String
-    attributes: {id: PIN_13_PERIPHERAL_FUNCTION}
+    attributes: {id: PIN_13_DIR}
     children:
     - type: Values
       children:
       - type: User
         attributes: {value: ''}
+  - type: String
+    attributes: {id: PIN_13_FUNCTION_TYPE}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: EIC_EXTINT4}
+  - type: String
+    attributes: {id: PIN_13_INEN}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: ''}
+  - type: String
+    attributes: {id: PIN_13_LAT}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: High}
+  - type: String
+    attributes: {id: PIN_13_MODE}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: ''}
+  - type: String
+    attributes: {id: PIN_13_PERIPHERAL_FUNCTION}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: A}
+  - type: String
+    attributes: {id: PIN_13_PULLEN}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'True'}
   - type: String
     attributes: {id: PIN_14_FUNCTION_TYPE}
     children:
@@ -2118,7 +2160,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0xc404'}
+        attributes: {id: core, value: '0xc414'}
   - type: String
     attributes: {id: PORT_GROUP_0_PAD_0}
     children:
@@ -2265,7 +2307,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0x0'}
+        attributes: {id: core, value: '0x5'}
   - type: String
     attributes: {id: PORT_GROUP_0_PINCFG5}
     children:

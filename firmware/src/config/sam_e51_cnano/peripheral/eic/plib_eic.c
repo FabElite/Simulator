@@ -86,7 +86,7 @@ void EIC_Initialize (void)
                               EIC_CONFIG_SENSE1_NONE  |
                               EIC_CONFIG_SENSE2_HIGH  |
                               EIC_CONFIG_SENSE3_BOTH | EIC_CONFIG_FILTEN3_Msk |
-                              EIC_CONFIG_SENSE4_BOTH  |
+                              EIC_CONFIG_SENSE4_FALL | EIC_CONFIG_FILTEN4_Msk |
                               EIC_CONFIG_SENSE5_NONE  |
                               EIC_CONFIG_SENSE6_NONE  |
                               EIC_CONFIG_SENSE7_NONE  ;
@@ -104,7 +104,7 @@ void EIC_Initialize (void)
 
 
     /* Debouncer enable */
-    EIC_REGS->EIC_DEBOUNCEN = 0x8004U;
+    EIC_REGS->EIC_DEBOUNCEN = 0x8014U;
 
     /* Event Control Output enable */
     EIC_REGS->EIC_EVCTRL = 0x4U;
@@ -113,14 +113,14 @@ void EIC_Initialize (void)
     EIC_REGS->EIC_DPRESCALER = EIC_DPRESCALER_PRESCALER0(0UL) | EIC_DPRESCALER_PRESCALER1(0UL) ;
 
     /* External Interrupt enable*/
-    EIC_REGS->EIC_INTENSET = 0x800cU;
+    EIC_REGS->EIC_INTENSET = 0x8018U;
 
     /* Callbacks for enabled interrupts */
     eicCallbackObject[0].eicPinNo = EIC_PIN_MAX;
     eicCallbackObject[1].eicPinNo = EIC_PIN_MAX;
     eicCallbackObject[2].eicPinNo = EIC_PIN_2;
     eicCallbackObject[3].eicPinNo = EIC_PIN_3;
-    eicCallbackObject[4].eicPinNo = EIC_PIN_MAX;
+    eicCallbackObject[4].eicPinNo = EIC_PIN_4;
     eicCallbackObject[5].eicPinNo = EIC_PIN_MAX;
     eicCallbackObject[6].eicPinNo = EIC_PIN_MAX;
     eicCallbackObject[7].eicPinNo = EIC_PIN_MAX;
@@ -161,17 +161,6 @@ void EIC_CallbackRegister(EIC_PIN pin, EIC_CALLBACK callback, uintptr_t context)
     }
 }
 
-void EIC_EXTINT_2_InterruptHandler(void)
-{
-    /* Clear interrupt flag */
-    EIC_REGS->EIC_INTFLAG = (1UL << 2);
-    /* Find any associated callback entries in the callback table */
-    if ((eicCallbackObject[2].callback != NULL))
-    {
-        eicCallbackObject[2].callback(eicCallbackObject[2].context);
-    }
-
-}
 void EIC_EXTINT_3_InterruptHandler(void)
 {
     /* Clear interrupt flag */

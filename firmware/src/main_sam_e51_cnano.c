@@ -80,10 +80,9 @@ static volatile bool isUSARTTxComplete = true;
 static volatile uint32_t g_tick = 0;
 static uint8_t uartTxBuffer[100] = {0};
 
-static void EIC_User_Handler(uintptr_t context)
+static void EIC_User_Handler_Ex_Switch(uintptr_t context)
 {
-    //changeTempSamplingRate = true;
-    //DplBrk_SetBrake (DplBrk_GetBrake() + 1u);
+    DplBrk_SetBrake (DplBrk_GetBrake() + 100u);
 }
 
 static void EIC_User_Handler_Board_Switch(uintptr_t context)
@@ -138,7 +137,7 @@ int main ( void )
     
     DplSYSTICK_Init();
     DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, usartDmaChannelHandler, 0);
-    EIC_CallbackRegister(EIC_PIN_2,EIC_User_Handler, 0);
+    EIC_CallbackRegister(EIC_PIN_4,EIC_User_Handler_Ex_Switch, 0);
     EIC_CallbackRegister(EIC_PIN_15,EIC_User_Handler_Board_Switch, 0);
     RTC_Timer32CallbackRegister(rtcEventHandler, 0);
     sprintf((char*)uartTxBuffer, "Toggling LED at 500 milliseconds rate \r\n");
@@ -147,7 +146,6 @@ int main ( void )
     DplSpd_Init();
     TC0_CaptureCallbackRegister(TC0_test_handler, 0);
     TC0_CaptureStart();
-    
     
     if (SCB_GetFPUType() != 1)
     {
