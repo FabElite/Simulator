@@ -135,6 +135,7 @@ void SYS_Initialize ( void* data )
 
     TCC0_PWMInitialize();
 
+	SYSTICK_TimerInitialize();
     DMAC_Initialize();
 
     SERCOM5_USART_Initialize();

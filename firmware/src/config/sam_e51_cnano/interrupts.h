@@ -59,6 +59,7 @@
 void Reset_Handler (void);
 void NonMaskableInt_Handler (void);
 void HardFault_Handler (void);
+void SysTick_Handler (void);
 void RTC_InterruptHandler (void);
 void EIC_EXTINT_3_InterruptHandler (void);
 void EIC_EXTINT_4_InterruptHandler (void);

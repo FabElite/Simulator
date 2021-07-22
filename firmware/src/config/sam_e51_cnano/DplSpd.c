@@ -40,29 +40,29 @@ static void EIC_User_Handler_PWM_Speed_Input(uintptr_t pcontext);
 /* ************************************************************************** */
 static void EIC_User_Handler_PWM_Speed_Input(uintptr_t pcontext)
 {    
-    static bool y_old_pin_state = false;
-    static uint64_t y_last_t_rising = false;
-    
-    if (PORT_PinRead(PORT_PIN_PA03) == true)
-    {
-        if(y_old_pin_state == false)       //Input changed from 0 to 1.
-        {
-          y_old_pin_state = true;          //Remember current input state.
-          g_pwm_measured_period_us = y_last_t_rising - usTicks;
-          y_last_t_rising = usTicks;
-          LED0_Set();
-        }
-    }
-    else if(y_old_pin_state == true)
-    {
-        y_old_pin_state = false;
-        g_pwm_speed_rpm  = ( (uint64_t)(usTicks - y_last_t_rising) * PWM_SPEED_MAX_VALUE ) / g_pwm_input_period_us;
-        if (g_pwm_speed_rpm > PWM_SPEED_MAX_VALUE)
-        {
-          g_pwm_speed_rpm = PWM_SPEED_MAX_VALUE;
-        }
-        LED0_Clear();
-    }
+//    static bool y_old_pin_state = false;
+//    static uint64_t y_last_t_rising = false;
+//    
+//    if (PORT_PinRead(PORT_PIN_PA03) == true)
+//    {
+//        if(y_old_pin_state == false)       //Input changed from 0 to 1.
+//        {
+//          y_old_pin_state = true;          //Remember current input state.
+//          g_pwm_measured_period_us = y_last_t_rising - usTicks;
+//          y_last_t_rising = usTicks;
+//          LED0_Set();
+//        }
+//    }
+//    else if(y_old_pin_state == true)
+//    {
+//        y_old_pin_state = false;
+//        g_pwm_speed_rpm  = ( (uint64_t)(usTicks - y_last_t_rising) * PWM_SPEED_MAX_VALUE ) / g_pwm_input_period_us;
+//        if (g_pwm_speed_rpm > PWM_SPEED_MAX_VALUE)
+//        {
+//          g_pwm_speed_rpm = PWM_SPEED_MAX_VALUE;
+//        }
+//        LED0_Clear();
+//    }
 }
 
 /* ************************************************************************** */
