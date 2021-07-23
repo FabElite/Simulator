@@ -3,11 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/fossato/Documents/Repo/same51n_getting_started/firmware/src/main_sam_e51_cnano.c</file>
-            <file>file:/C:/Users/fossato/Documents/Repo/same51n_getting_started/firmware/src/config/sam_e51_cnano/peripheral/port/plib_port.c</file>
-            <file>file:/C:/Users/fossato/Documents/Repo/same51n_getting_started/firmware/src/config/sam_e51_cnano/initialization.c</file>
-            <file>file:/C:/Users/fossato/Documents/Repo/same51n_getting_started/firmware/src/config/sam_e51_cnano/definitions.h</file>
-            <file>file:/C:/Users/fossato/Documents/Repo/same51n_getting_started/firmware/sam_e51_cnano.X/nbproject/Makefile-impl.mk</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/definitions.h</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/main_sam_e51_cnano.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/peripheral/systick/plib_systick.h</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/sam_e51_cnano.X/nbproject/Makefile-impl.mk</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/initialization.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/DplSch.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/device.h</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/toolchain_specifics.h</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/peripheral/systick/plib_systick.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/DplSch.h</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/peripheral/dmac/plib_dmac.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/DplSpd.h</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/DplBrk.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/peripheral/dmac/plib_dmac.h</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/peripheral/port/plib_port.h</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/DplHmi.h</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/DplHmi.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/src/config/sam_e51_cnano/DplSpd.c</file>
         </group>
     </open-files>
 </project-private>

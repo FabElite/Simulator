@@ -5,100 +5,43 @@
    Bailey Miller. Univ. of California, Riverside and Irvine.
    RIOS version 1.2
 */
-#define TASKNUM 2
+
+#include "DplSch.h"
+#include "DplHmi.h"
+#include "peripheral/systick/plib_systick.h"
+
+#define TASK_NUM (1)
+
+#define PERIOD_50MS      (50)
+#define PERIOD_100MS    (100)
+#define PERIOD_250MS    (250)
+#define PERIOD_500MS    (500)
+#define PERIOD_1000MS  (1000)
 
 typedef struct task {
-   unsigned long period;      // Rate at which the task should tick
-   unsigned long elapsedTime; // Time since task's last tick
-   void (*TickFct)(void);     // Function to call for task's tick
+   unsigned long periodms;    // Rate at which the task should tick
+   unsigned long lastTick;  // Time since task's last tick
+   void (*TickFct)(void);   // Function to call for task's tick
 } task;
 
-task tasks[TASKNUM] = {{0,0,0},{0,0,0}};
 
-const unsigned long tasksPeriodGCD = 200; // Timer tick rate
-const unsigned long periodToggle   = 1000;
-const unsigned long periodSequence = 200;
+task tasks[TASK_NUM]= { {PERIOD_100MS,             0,     &DplHmi_mngBoardLed} };
 
-void TickFct_Toggle(void);
-void TickFct_Sequence(void);
 
-unsigned char TimerFlag = 0;
-void TimerISR(void) {
-//   if (TimerFlag) {
-//      printf("Timer ticked before task processing done.\n");
-//   }
-//   else {
-//      TimerFlag = 1;
-//   }
-//   return;
-}
-
-void DplSch_Init(void)
+void DplSch_run(void)
 {
-
-   // Priority assigned to lower position tasks in array
-   unsigned char i = 0;
-   tasks[i].period      = periodSequence;
-   tasks[i].elapsedTime = tasks[i].period;
-   tasks[i].TickFct     = &TickFct_Sequence;
-   
-}
-void main_2(void) {
-   // Priority assigned to lower position tasks in array
-   unsigned char i = 0;
-   tasks[i].period      = periodSequence;
-   tasks[i].elapsedTime = tasks[i].period;
-   tasks[i].TickFct     = &TickFct_Sequence;
-//   ++i;
-//   tasks[i].period      = periodToggle;
-//   tasks[i].elapsedTime = tasks[i].period;
-//   tasks[i].TickFct     = &TickFct_Toggle;
-//
-//   TimerSet(tasksPeriodGCD);
-//   TimerOn();
-//
-//   while(1) {
-//      // Heart of the scheduler code
-//      for (i=0; i < tasksNum; ++i) {
-//         if (tasks[i].elapsedTime >= tasks[i].period) { // Ready
-//            tasks[i].TickFct(); //execute task tick
-//            tasks[i].elapsedTime = 0;
-//         }
-//         tasks[i].elapsedTime += tasksPeriodGCD;
-//      }
-//      TimerFlag = 0;
-//      while (!TimerFlag) {
-//         Sleep();
-//      }
-//   }
-}
-
-// Task: Toggle an output
-void TickFct_Toggle(void)   {
-//   static unsigned char init = 1;
-//   if (init) { // Initialization behavior
-//      B0 = 0;
-//      init = 0;
-//   }
-//   else { // Normal behavior
-//      B0 = !B0;
-//   }
-}
-
- // Task: Sequence a 1 across 3 outputs
-void TickFct_Sequence(void) {
-//   static unsigned char init = 1;
-//   unsigned char tmp = 0;
-//   if (init) { // Initialization behavior
-//      init = 0;
-//      B2   = 1;
-//      B3   = 0;
-//      B4   = 0;
-//   }
-//   else { // Normal behavior
-//      tmp = B4;
-//      B4  = B3;
-//      B3  = B2;
-//      B2  = tmp;
-//   }
+   while(1)
+   {
+      volatile static uint32_t yActualCounterValue;
+      // Heart of the scheduler code
+      for (int i=0; i < TASK_NUM; ++i)
+      {
+         yActualCounterValue = SYSTICK_TickCounterGet();
+         if (yActualCounterValue >= tasks[i].lastTick + tasks[i].periodms)
+         {
+            tasks[i].TickFct(); //execute task tick
+            tasks[i].lastTick = SYSTICK_TickCounterGet();
+         }
+      }
+   }
 }

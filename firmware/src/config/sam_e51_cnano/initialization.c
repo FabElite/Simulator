@@ -142,8 +142,6 @@ void SYS_Initialize ( void* data )
 
     EIC_Initialize();
 
-    RTC_Initialize();
-
     TC0_CaptureInitialize();
 
 

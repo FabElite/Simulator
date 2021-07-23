@@ -23,7 +23,6 @@
 /* Section: Included Files                                                    */
 /* ************************************************************************** */
 #include "definitions.h"                // SYS function prototypes
-#include "DplSYSTICK.h"
 
 /* ************************************************************************** */
 /* Section: Constants & Data Types                                            */

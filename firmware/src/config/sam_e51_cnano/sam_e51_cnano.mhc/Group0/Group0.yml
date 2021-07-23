@@ -3,4 +3,4 @@ type: GroupComponent
 attributes: {displayName: Group0, id: Group0}
 children:
 - type: ElementPosition
-  attributes: {x: '30', y: '100', id: Group0}
+  attributes: {x: '26', y: '251', id: Group0}

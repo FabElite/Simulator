@@ -94,7 +94,6 @@ uint32_t SYSTICK_TimerFrequencyGet ( void )
 }
 
 
-
 void SYSTICK_DelayMs ( uint32_t delay_ms)
 {
 	uint32_t tickStart = 0U;
@@ -110,6 +109,11 @@ void SYSTICK_DelayMs ( uint32_t delay_ms)
 		{
 		}
 	}
+}
+
+uint32_t SYSTICK_TickCounterGet ( void )
+{
+    return (systick.tickCounter);
 }
 
 void SYSTICK_TimerCallbackSet ( SYSTICK_CALLBACK callback, uintptr_t context )

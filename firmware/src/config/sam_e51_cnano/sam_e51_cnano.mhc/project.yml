@@ -6,20 +6,20 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 9D5EE038B893127B787BC03DFA6B467F
-- generatedChecksum: 8292F1165CB92D682DEFC6C07C8DC0C9
+- generatedChecksum: FD5172EE8EE8B710C1F8E260DB65A701
   logicalPath: config/sam_e51_cnano
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 8292F1165CB92D682DEFC6C07C8DC0C9
-- generatedChecksum: 21359B372D40D8E7D4DD8E837A4616E9
+  userChecksum: FD5172EE8EE8B710C1F8E260DB65A701
+- generatedChecksum: 6AE2E1EAA543D7F6DF7CBFBC8CB40FB0
   logicalPath: config/sam_e51_cnano
   name: interrupts.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 21359B372D40D8E7D4DD8E837A4616E9
+  userChecksum: 6AE2E1EAA543D7F6DF7CBFBC8CB40FB0
 - generatedChecksum: 6513F2461B8F476B68CA73906086047F
   logicalPath: config/sam_e51_cnano
   name: libc_syscalls.c
@@ -69,13 +69,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 1D6851638DADDDD827F9331FF838A574
-- generatedChecksum: A5AC6FBCDAD9B57DEC5BDE7C4A1577CB
+- generatedChecksum: A5156365E00768C6114E12C5A5E1AC0E
   logicalPath: config/sam_e51_cnano/peripheral/nvic
   name: plib_nvic.c
   physicalPath: peripheral/nvic
   security: NON_SECURE
   type: SOURCE
-  userChecksum: A5AC6FBCDAD9B57DEC5BDE7C4A1577CB
+  userChecksum: A5156365E00768C6114E12C5A5E1AC0E
 - generatedChecksum: 57E1F9EA5E404569BFC1A3629AEC05F2
   logicalPath: config/sam_e51_cnano/peripheral/nvmctrl
   name: plib_nvmctrl.c
@@ -90,13 +90,6 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: B5B34056A8D23EE64F8126B2A29AAA63
-- generatedChecksum: 3C6977BD8087BCB0FED16E277D13A74E
-  logicalPath: config/sam_e51_cnano/peripheral/rtc
-  name: plib_rtc_timer.c
-  physicalPath: peripheral/rtc
-  security: NON_SECURE
-  type: SOURCE
-  userChecksum: 3C6977BD8087BCB0FED16E277D13A74E
 - generatedChecksum: 9DCFC294211CEDC07E3EAC2E0D389FBB
   logicalPath: config/sam_e51_cnano/peripheral/sercom/usart
   name: plib_sercom5_usart.c
@@ -104,13 +97,20 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 9DCFC294211CEDC07E3EAC2E0D389FBB
-- generatedChecksum: 32FBC6DBE24FD0CECD275F0FA1E9F412
+- generatedChecksum: 39F3DF6201B7D054D5F64907101ED4AB
+  logicalPath: config/sam_e51_cnano/peripheral/systick
+  name: plib_systick.c
+  physicalPath: peripheral/systick
+  security: NON_SECURE
+  type: SOURCE
+  userChecksum: 15C9B31D6C5BA096C0652A73D1AF1CD6
+- generatedChecksum: 1C828D54D9B21058A4925EA0F3CE833F
   logicalPath: config/sam_e51_cnano/peripheral/tc
   name: plib_tc0.c
   physicalPath: peripheral/tc
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 32FBC6DBE24FD0CECD275F0FA1E9F412
+  userChecksum: 1C828D54D9B21058A4925EA0F3CE833F
 - generatedChecksum: E2B49A2E9E3D18C3C197D9CFCD60B8D6
   logicalPath: config/sam_e51_cnano/peripheral/tcc
   name: plib_tcc0.c
@@ -349,13 +349,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: A53FD822A0DB1BCE06AB3B32E929E5E2
-- generatedChecksum: 0AAF20664BE78235D3E14B609F768C58
+- generatedChecksum: 0767D077EFD36260720A469E7CD2A723
   logicalPath: config/sam_e51_cnano
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: 0AAF20664BE78235D3E14B609F768C58
+  userChecksum: 0767D077EFD36260720A469E7CD2A723
 - generatedChecksum: CB14434C0E245529DDD9AFEAE3CA6AF1
   logicalPath: config/sam_e51_cnano
   name: device.h
@@ -503,13 +503,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 4693BBF4AEC1A855609768D5BD4708F8
-- generatedChecksum: 350EB26A4E4E5AD12079D9F386A1077E
+- generatedChecksum: 3F3F23747AD68A391C374BD70F6D0AF5
   logicalPath: config/sam_e51_cnano
   name: interrupts.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: 350EB26A4E4E5AD12079D9F386A1077E
+  userChecksum: 3F3F23747AD68A391C374BD70F6D0AF5
 - generatedChecksum: BC7DDF48FB0F859F260CF0E020CAEAED
   logicalPath: packs/ATSAME51J20A_DFP/component
   name: mclk.h
@@ -671,13 +671,6 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 8F1BFFD39A33FAF677C9787537E4CAE9
-- generatedChecksum: BE830E46647CD89C924E8BDA8C9F8936
-  logicalPath: config/sam_e51_cnano/peripheral/rtc
-  name: plib_rtc.h
-  physicalPath: peripheral/rtc
-  security: NON_SECURE
-  type: HEADER
-  userChecksum: BE830E46647CD89C924E8BDA8C9F8936
 - generatedChecksum: C75B0894D7BF62BDDF0B78937BB15354
   logicalPath: config/sam_e51_cnano/peripheral/sercom/usart
   name: plib_sercom5_usart.h
@@ -692,6 +685,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 881B1D67FA4C320BBD6AC86344695C9C
+- generatedChecksum: 351E4E1AEDA50E9DDAE24544AD21FE1E
+  logicalPath: config/sam_e51_cnano/peripheral/systick
+  name: plib_systick.h
+  physicalPath: peripheral/systick
+  security: NON_SECURE
+  type: HEADER
+  userChecksum: 351E4E1AEDA50E9DDAE24544AD21FE1E
 - generatedChecksum: 1A1FBB656DE054F880E4E9807FA37970
   logicalPath: config/sam_e51_cnano/peripheral/tc
   name: plib_tc0.h

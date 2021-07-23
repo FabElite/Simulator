@@ -55,27 +55,9 @@
 #include "definitions.h"                // SYS function prototypes
 
 #include "DplBrk.h"
+#include "DplSch.h"
 #include "DplSpd.h"
-#include "DplSYSTICK.h"
 
-/* RTC Time period match values for input clock of 1 KHz */
-#define PERIOD_500MS                            (512)
-#define PERIOD_1S                               (1024)
-#define PERIOD_2S                               (2048)
-#define PERIOD_4S                               (4096)
-
-typedef enum
-{
-    TEMP_SAMPLING_RATE_500MS = 0,
-    TEMP_SAMPLING_RATE_1S = 1,
-    TEMP_SAMPLING_RATE_2S = 2,
-    TEMP_SAMPLING_RATE_4S = 3,
-} TEMP_SAMPLING_RATE;
-static TEMP_SAMPLING_RATE tempSampleRate = TEMP_SAMPLING_RATE_500MS;
-static const char timeouts[4][20] = {"500 milliSeconds", "1 Second",  "2 Seconds",  "4 Seconds"};
-
-static volatile bool isRTCExpired = false;
-static volatile bool changeTempSamplingRate = false;
 static volatile bool isUSARTTxComplete = true;
 static volatile uint32_t g_tick = 0;
 static uint8_t uartTxBuffer[100] = {0};
@@ -92,7 +74,7 @@ static void EIC_User_Handler_Board_Switch(uintptr_t context)
 
 static void TC0_test_handler(TC_CAPTURE_STATUS zboh, uintptr_t context)
 {
-    static int y_test0,y_test1, counter;
+    static int y_test0, y_test1, counter;
 
     if (counter >=100)
     {
@@ -102,19 +84,15 @@ static void TC0_test_handler(TC_CAPTURE_STATUS zboh, uintptr_t context)
         {
             __NOP();
         }
-        sprintf((char*)uartTxBuffer, "Val0 %d | Val1 %d\r\n", (int) (((float)y_test0*(float)32000)/(float)120), (int) (((float)y_test1*(float)32000)/(float)120));
+        sprintf((char*)uartTxBuffer, "Val0 %d | Val1 %d\r\n", (int) (((float)y_test0*(float)32)/(float)30), (int) (((float)y_test1*(float)32)/(float)30));
+        DMAC_ChannelTransfer(DMAC_CHANNEL_0, uartTxBuffer, \
+                    (const void *)&(SERCOM5_REGS->USART_INT.SERCOM_DATA), \
+                    strlen((const char*)uartTxBuffer));
         counter=0;
     }
     counter++;
 }
 
-static void rtcEventHandler (RTC_TIMER32_INT_MASK intCause, uintptr_t context)
-{
-    if (intCause & RTC_MODE0_INTENSET_CMP0_Msk)
-    {            
-        isRTCExpired    = true;
-    }
-}
 static void usartDmaChannelHandler(DMAC_TRANSFER_EVENT event, uintptr_t contextHandle)
 {
     if (event == DMAC_TRANSFER_EVENT_COMPLETE)
@@ -130,85 +108,42 @@ static void usartDmaChannelHandler(DMAC_TRANSFER_EVENT event, uintptr_t contextH
 // *****************************************************************************
 int main ( void )
 {
-    uint8_t uartLocalTxBuffer[100] = {0};
-
     /* Initialize all modules */
-    SYS_Initialize (NULL);
+    SYS_Initialize(NULL);
     
-    DplSYSTICK_Init();
     DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, usartDmaChannelHandler, 0);
     EIC_CallbackRegister(EIC_PIN_4,EIC_User_Handler_Ex_Switch, 0);
     EIC_CallbackRegister(EIC_PIN_15,EIC_User_Handler_Board_Switch, 0);
-    RTC_Timer32CallbackRegister(rtcEventHandler, 0);
-    sprintf((char*)uartTxBuffer, "Toggling LED at 500 milliseconds rate \r\n");
-    RTC_Timer32Start();
+    SYSTICK_TimerStart();
+    
     DplBrk_Init();
     DplSpd_Init();
     TC0_CaptureCallbackRegister(TC0_test_handler, 0);
     TC0_CaptureStart();
     
+    // controllo che la FPU sia attiva
     if (SCB_GetFPUType() != 1)
     {
         while (1)
         {}
     }
     
+    // Stampa su COM inizio del programma
+    sprintf((char*)uartTxBuffer, "----> INIZIO PROGRAMMA <----\r\n");
+    DMAC_ChannelTransfer(DMAC_CHANNEL_0, uartTxBuffer, \
+                    (const void *)&(SERCOM5_REGS->USART_INT.SERCOM_DATA), \
+                    strlen((const char*)uartTxBuffer));
+
     TCC0_REGS->TCC_CC[2] = 7500;
     
     while ( true )
-    {       
-        if ((isRTCExpired == true) && (true == isUSARTTxComplete))
-        {
-            isRTCExpired = false;
-            isUSARTTxComplete = false;
-            //LED0_Toggle();
-            DMAC_ChannelTransfer(DMAC_CHANNEL_0, uartTxBuffer, \
-                    (const void *)&(SERCOM5_REGS->USART_INT.SERCOM_DATA), \
-                    strlen((const char*)uartTxBuffer));
-        }
-        /* Maintain state machines of all polled MPLAB Harmony modules. */
-        if(changeTempSamplingRate == true)
-        {
-            changeTempSamplingRate = false;
-            if(tempSampleRate == TEMP_SAMPLING_RATE_500MS)
-            {
-                tempSampleRate = TEMP_SAMPLING_RATE_1S;
-                RTC_Timer32Compare0Set(PERIOD_1S);
-            }
-            else if(tempSampleRate == TEMP_SAMPLING_RATE_1S)
-            {
-                tempSampleRate = TEMP_SAMPLING_RATE_2S;
-                RTC_Timer32Compare0Set(PERIOD_2S);                        
-            }
-            else if(tempSampleRate == TEMP_SAMPLING_RATE_2S)
-            {
-                tempSampleRate = TEMP_SAMPLING_RATE_4S;
-                RTC_Timer32Compare0Set(PERIOD_4S);                                        
-            }    
-            else if(tempSampleRate == TEMP_SAMPLING_RATE_4S)
-            {
-               tempSampleRate = TEMP_SAMPLING_RATE_500MS;
-               RTC_Timer32Compare0Set(PERIOD_500MS);
-            }
-            else
-            {
-                ;
-            }
-            RTC_Timer32CounterSet(0);
-            sprintf((char*)uartLocalTxBuffer, "LED Toggling rate is changed to %s\r\n", &timeouts[(uint8_t)tempSampleRate][0]);
-            DMAC_ChannelTransfer(DMAC_CHANNEL_0, uartLocalTxBuffer, \
-                    (const void *)&(SERCOM5_REGS->USART_INT.SERCOM_DATA), \
-                    strlen((const char*)uartLocalTxBuffer));
-            sprintf((char*)uartTxBuffer, "Toggling LED at %s rate \r\n", &timeouts[(uint8_t)tempSampleRate][0]);
-        }
-
+    {
+        DplSch_run();
     }
 
     /* Execution should not come here during normal operation */
-
     return ( EXIT_FAILURE );
 }
 /*******************************************************************************
  End of File
 */
-

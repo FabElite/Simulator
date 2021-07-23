@@ -2,10 +2,10 @@
 /** Descriptive File Name
 
   @Company
-    Company Name
+    Elite srl
 
   @File Name
-    filename.h
+    DplHmi.h
 
   @Summary
     Brief description of the file.
@@ -15,15 +15,18 @@
  */
 /* ************************************************************************** */
 
-#ifndef DPLSCH_H    /* Guard against multiple inclusion */
-#define DPLSCH_H
+#ifndef DPLHMI_H    /* Guard against multiple inclusion */
+#define DPLHMI_H
 
 #include "definitions.h" 
-#include "device.h"
 
-void DplSch_run(void);
+/* ************************************************************************** */
+/* Section: Included Files                                                    */
+/* ************************************************************************** */
+void DplHmi_mngBoardLed( void );
 
-#endif /* DPLSCH_H */
+
+#endif /* DPLHMI_H */
 
 /* *****************************************************************************
  End of File

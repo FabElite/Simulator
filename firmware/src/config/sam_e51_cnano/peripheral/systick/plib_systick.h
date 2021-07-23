@@ -77,6 +77,7 @@ uint32_t SYSTICK_TimerPeriodGet ( void );
 uint32_t SYSTICK_TimerCounterGet ( void );
 uint32_t SYSTICK_TimerFrequencyGet ( void );
 void SYSTICK_DelayMs ( uint32_t delay_ms );
+uint32_t SYSTICK_TickCounterGet ( void );
 void SYSTICK_TimerCallbackSet ( SYSTICK_CALLBACK callback, uintptr_t context );
 #ifdef __cplusplus // Provide C++ Compatibility
  }
