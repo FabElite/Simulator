@@ -5,7 +5,7 @@
     Elite srl
 
   @File Name
-    DplSpd.c
+    AplHmi.c
 
   @Summary
     Brief description of the file.
@@ -18,43 +18,35 @@
 /* ************************************************************************** */
 /* Section: Included Files                                                    */
 /* ************************************************************************** */
+#include "AplHmi.h"
+#include "DplHmi.h"
 #include "DplSpd.h"
 
 /* ************************************************************************** */
 /* Section: File Scope or Global Data                                         */
 /* ************************************************************************** */
-speed_data g_speed_data;
-        
+static uint8_t guartTxBuffer[100];
+
 /* ************************************************************************** */
-// Section: Local Functions Prototype                                         */
+// Section: Local Functions                                                   */
 /* ************************************************************************** */
-static void TC0_test_handler(TC_CAPTURE_STATUS zStatus, uintptr_t context);
-/* ************************************************************************** */
-// Section: Local Functions Definition                                        */
-/* ************************************************************************** */
-static void TC0_test_handler(TC_CAPTURE_STATUS zStatus, uintptr_t context)
-{
-    if (zStatus == (TC_CAPTURE_STATUS_CAPTURE0_READY | TC_CAPTURE_STATUS_CAPTURE1_READY) )
-    {
-        g_speed_data.pwm_high_time_ms = (float)TC0_Capture16bitChannel0Get()*(32.0/30.0);
-        g_speed_data.pwm_period_ms = (float)TC0_Capture16bitChannel1Get()*(32.0/30.0);
-        g_speed_data.speedDutyCycle = (g_speed_data.pwm_high_time_ms)/(g_speed_data.pwm_period_ms);
-    }
-}
 
 /* ************************************************************************** */
 // Section: Interface Functions                                               */
 /* ************************************************************************** */
-uint32_t DplSpd_Init(void)
+void AplHmi_init (void)
 {
-    TC0_CaptureCallbackRegister(TC0_test_handler, 0);
-    TC0_CaptureStart();
-    return 0;
+    sprintf((char*)guartTxBuffer, "----> INIZIO PROGRAMMA <----\r\n");
+    
+    DplHmi_init();
+    DplHmi_PrintOut(&guartTxBuffer, strlen((const char*)guartTxBuffer));
 }
 
-speed_data DplSpd_GetSpeedData(void)
+void AplHmiMng (void)
 {
-    return (g_speed_data);
+    sprintf((char*)guartTxBuffer, "%d\r\n", (int)(DplSpd_GetSpeedData().speedDutyCycle*1000));
+    
+    DplHmi_PrintOut(guartTxBuffer,strlen((const char*)guartTxBuffer));
 }
 /* *****************************************************************************
  End of File

@@ -54,13 +54,12 @@
 #include <string.h>
 #include "definitions.h"                // SYS function prototypes
 
+#include "AplHmi.h"
 #include "DplBrk.h"
 #include "DplSch.h"
 #include "DplSpd.h"
 
-static volatile bool isUSARTTxComplete = true;
 static volatile uint32_t g_tick = 0;
-static uint8_t uartTxBuffer[100] = {0};
 
 static void EIC_User_Handler_Ex0_Switch(uintptr_t context)
 {
@@ -76,14 +75,6 @@ static void EIC_User_Handler_Board_Switch(uintptr_t context)
     DplBrk_SetBrake (DplBrk_GetBrake() - 100u);
 }
 
-static void usartDmaChannelHandler(DMAC_TRANSFER_EVENT event, uintptr_t contextHandle)
-{
-    if (event == DMAC_TRANSFER_EVENT_COMPLETE)
-    {
-        isUSARTTxComplete = true;
-    }
-}
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Main Entry Point
@@ -94,7 +85,6 @@ int main ( void )
     /* Initialize all modules */
     SYS_Initialize(NULL);
     
-    DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, usartDmaChannelHandler, 0);
     EIC_CallbackRegister(EIC_PIN_3,EIC_User_Handler_Ex1_Switch, 0);
     EIC_CallbackRegister(EIC_PIN_4,EIC_User_Handler_Ex0_Switch, 0);
     EIC_CallbackRegister(EIC_PIN_15,EIC_User_Handler_Board_Switch, 0);
@@ -102,19 +92,13 @@ int main ( void )
     
     DplBrk_Init();
     DplSpd_Init();
-    
+    AplHmi_init();
     // controllo che la FPU sia attiva
     if (SCB_GetFPUType() != 1)
     {
         while (1)
         {}
     }
-    
-    // Stampa su COM inizio del programma
-    sprintf((char*)uartTxBuffer, "----> INIZIO PROGRAMMA <----\r\n");
-    DMAC_ChannelTransfer(DMAC_CHANNEL_0, uartTxBuffer, \
-                    (const void *)&(SERCOM5_REGS->USART_INT.SERCOM_DATA), \
-                    strlen((const char*)uartTxBuffer));
 
     TCC0_REGS->TCC_CC[2] = 7500;
     

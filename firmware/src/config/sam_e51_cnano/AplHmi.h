@@ -5,7 +5,7 @@
     Company Name
 
   @File Name
-    filename.h
+    AplHmi.h
 
   @Summary
     Brief description of the file.
@@ -15,36 +15,28 @@
  */
 /* ************************************************************************** */
 
-#ifndef DPLSPD_H    /* Guard against multiple inclusion */
-#define DPLSPD_H
+#ifndef APLHMI_H
+#define APLHMI_H
 
+#include "definitions.h" 
 
 /* ************************************************************************** */
 /* Section: Included Files                                                    */
 /* ************************************************************************** */
-#include "definitions.h"                // SYS function prototypes
 
-/* ************************************************************************** */
-/* Section: Constants & Data Types                                            */
-/* ************************************************************************** */
-typedef struct speed_data
-{
-    float pwm_period_ms;
-    float pwm_high_time_ms;
-    float speedDutyCycle;
-} speed_data;
-
-
+// *****************************************************************************
+// Section: Data Types
+// *****************************************************************************
 
 // *****************************************************************************
 // Section: Interface Functions
 // *****************************************************************************
+void AplHmi_init (void);
+void AplHmiMng (void);
 
-uint32_t DplSpd_Init(void);
 
-speed_data DplSpd_GetSpeedData(void);
 
-#endif /* DPLSPD_H */
+#endif /* APLHMI_H */
 
 /* *****************************************************************************
  End of File

@@ -1,16 +1,10 @@
 
-
-/*
-   Copyright (c) 2013 Frank Vahid, Tony Givargis, and
-   Bailey Miller. Univ. of California, Riverside and Irvine.
-   RIOS version 1.2
-*/
-
+#include "AplHmi.h"
 #include "DplSch.h"
 #include "DplHmi.h"
 #include "peripheral/systick/plib_systick.h"
 
-#define TASK_NUM (1)
+#define TASK_NUM (2)
 
 #define PERIOD_50MS      (50)
 #define PERIOD_100MS    (100)
@@ -25,7 +19,12 @@ typedef struct task {
 } task;
 
 
-task tasks[TASK_NUM]= { {PERIOD_100MS,             0,     &DplHmi_mngBoardLed} };
+task tasks[TASK_NUM]=
+{
+    // period       lastTick        pointer
+    {PERIOD_100MS,             0,     &DplHmi_mngBoardLed},
+    {PERIOD_100MS,             0,     &AplHmiMng}
+};
 
 
 void DplSch_run(void)
