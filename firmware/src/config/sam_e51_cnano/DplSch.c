@@ -30,18 +30,15 @@ task tasks[TASK_NUM]= { {PERIOD_100MS,             0,     &DplHmi_mngBoardLed} }
 
 void DplSch_run(void)
 {
-   while(1)
-   {
-      volatile static uint32_t yActualCounterValue;
-      // Heart of the scheduler code
-      for (int i=0; i < TASK_NUM; ++i)
-      {
-         yActualCounterValue = SYSTICK_TickCounterGet();
-         if (yActualCounterValue >= tasks[i].lastTick + tasks[i].periodms)
-         {
-            tasks[i].TickFct(); //execute task tick
-            tasks[i].lastTick = SYSTICK_TickCounterGet();
-         }
-      }
-   }
+    volatile static uint32_t yActualCounterValue;
+    // Heart of the scheduler code
+    for (int i=0; i < TASK_NUM; ++i)
+    {
+       yActualCounterValue = SYSTICK_TickCounterGet();
+       if (yActualCounterValue >= tasks[i].lastTick + tasks[i].periodms)
+       {
+          tasks[i].lastTick = yActualCounterValue;
+          tasks[i].TickFct(); //execute task tick
+       }
+    }
 }

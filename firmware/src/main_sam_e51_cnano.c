@@ -62,35 +62,18 @@ static volatile bool isUSARTTxComplete = true;
 static volatile uint32_t g_tick = 0;
 static uint8_t uartTxBuffer[100] = {0};
 
-static void EIC_User_Handler_Ex_Switch(uintptr_t context)
+static void EIC_User_Handler_Ex0_Switch(uintptr_t context)
 {
     DplBrk_SetBrake (DplBrk_GetBrake() + 100u);
+}
+static void EIC_User_Handler_Ex1_Switch(uintptr_t context)
+{
+    DplBrk_SetBrake (DplBrk_GetBrake() - 100u);
 }
 
 static void EIC_User_Handler_Board_Switch(uintptr_t context)
 {
     DplBrk_SetBrake (DplBrk_GetBrake() - 100u);
-}
-
-static void TC0_test_handler(TC_CAPTURE_STATUS zboh, uintptr_t context)
-{
-    static int y_test0, y_test1, counter;
-
-    if (counter >=100)
-    {
-        y_test0 = TC0_Capture16bitChannel0Get();
-        y_test1 = TC0_Capture16bitChannel1Get();
-        if (y_test0 == 1 && y_test1 == 1)
-        {
-            __NOP();
-        }
-        sprintf((char*)uartTxBuffer, "Val0 %d | Val1 %d\r\n", (int) (((float)y_test0*(float)32)/(float)30), (int) (((float)y_test1*(float)32)/(float)30));
-        DMAC_ChannelTransfer(DMAC_CHANNEL_0, uartTxBuffer, \
-                    (const void *)&(SERCOM5_REGS->USART_INT.SERCOM_DATA), \
-                    strlen((const char*)uartTxBuffer));
-        counter=0;
-    }
-    counter++;
 }
 
 static void usartDmaChannelHandler(DMAC_TRANSFER_EVENT event, uintptr_t contextHandle)
@@ -112,14 +95,13 @@ int main ( void )
     SYS_Initialize(NULL);
     
     DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, usartDmaChannelHandler, 0);
-    EIC_CallbackRegister(EIC_PIN_4,EIC_User_Handler_Ex_Switch, 0);
+    EIC_CallbackRegister(EIC_PIN_3,EIC_User_Handler_Ex1_Switch, 0);
+    EIC_CallbackRegister(EIC_PIN_4,EIC_User_Handler_Ex0_Switch, 0);
     EIC_CallbackRegister(EIC_PIN_15,EIC_User_Handler_Board_Switch, 0);
     SYSTICK_TimerStart();
     
     DplBrk_Init();
     DplSpd_Init();
-    TC0_CaptureCallbackRegister(TC0_test_handler, 0);
-    TC0_CaptureStart();
     
     // controllo che la FPU sia attiva
     if (SCB_GetFPUType() != 1)
