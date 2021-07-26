@@ -38,23 +38,34 @@
 uint32_t DplBrk_Init(void)
 {
     TCC0_PWMStart();
-    
     return 0;
 }
 
-void DplBrk_SetBrake(uint32_t zBrake)
+void DplBrk_SetBrake(float zBrakePerc)
 {
-    if (zBrake > DPLBRK_MAX_BRAKE)
+    uint32_t zActualBreak;
+    
+    if (zBrakePerc < 0)
     {
-        zBrake = DPLBRK_MAX_BRAKE;
+        zActualBreak = 0;
+    }
+    else
+    {
+        zActualBreak = (uint32_t)(zBrakePerc * 150);
     }
     
-    TCC0_REGS->TCC_CC[2] = zBrake;
+    // controllo che il valore di massimo freno non superi il massimo assoluto
+    if (zActualBreak > (TCC0_REGS->TCC_PER + 1) )
+    {
+        zActualBreak = (TCC0_REGS->TCC_PER+ 1);
+    }
+    
+    TCC0_REGS->TCC_CC[2] = zActualBreak;
 }
 
-uint32_t DplBrk_GetBrake( void )
+float DplBrk_GetBrake( void )
 {    
-    return (TCC0_REGS->TCC_CC[2]);
+    return ((float)TCC0_REGS->TCC_CC[2]/150.0);
 }
 
 

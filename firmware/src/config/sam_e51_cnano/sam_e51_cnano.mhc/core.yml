@@ -2104,9 +2104,16 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: 'True'}
+        attributes: {value: ''}
   - type: String
     attributes: {id: PIN_46_PERIPHERAL_FUNCTION}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: ''}
+  - type: String
+    attributes: {id: PIN_4_DIR}
     children:
     - type: Values
       children:
@@ -2119,6 +2126,20 @@ children:
       children:
       - type: User
         attributes: {value: EIC_EXTINT3}
+  - type: String
+    attributes: {id: PIN_4_INEN}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: ''}
+  - type: String
+    attributes: {id: PIN_4_LAT}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: High}
   - type: String
     attributes: {id: PIN_4_MODE}
     children:
@@ -2133,6 +2154,13 @@ children:
       children:
       - type: User
         attributes: {value: A}
+  - type: String
+    attributes: {id: PIN_4_PULLEN}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'True'}
   - type: String
     attributes: {id: PIN_5_PERIPHERAL_FUNCTION}
     children:
@@ -2174,7 +2202,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0xc414'}
+        attributes: {id: core, value: '0xc41c'}
   - type: String
     attributes: {id: PORT_GROUP_0_PAD_0}
     children:
@@ -2300,7 +2328,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0x5'}
+        attributes: {id: core, value: '0x1'}
   - type: String
     attributes: {id: PORT_GROUP_0_PINCFG25}
     children:
@@ -2314,7 +2342,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0x1'}
+        attributes: {id: core, value: '0x5'}
   - type: String
     attributes: {id: PORT_GROUP_0_PINCFG4}
     children:
@@ -3079,6 +3107,22 @@ children:
       children:
       - type: User
         attributes: {value: 'true'}
+  - type: Setting
+    attributes: {id: XC32_HEAP}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: value}
+        children:
+        - {type: Value, value: '1024'}
+  - type: Integer
+    attributes: {id: XC32_HEAP_SIZE}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1024'}
   - type: Boolean
     attributes: {id: systickEnable}
     children:

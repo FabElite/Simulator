@@ -19,12 +19,13 @@
 /* Section: Included Files                                                    */
 /* ************************************************************************** */
 #include "DplSpd.h"
+#include "peripheral/tc/plib_tc0.h"
 
 /* ************************************************************************** */
 /* Section: File Scope or Global Data                                         */
 /* ************************************************************************** */
 speed_data g_speed_data;
-        
+float g_TickTomsConstant;
 /* ************************************************************************** */
 // Section: Local Functions Prototype                                         */
 /* ************************************************************************** */
@@ -36,8 +37,8 @@ static void TC0_test_handler(TC_CAPTURE_STATUS zStatus, uintptr_t context)
 {
     if (zStatus == (TC_CAPTURE_STATUS_CAPTURE0_READY | TC_CAPTURE_STATUS_CAPTURE1_READY) )
     {
-        g_speed_data.pwm_high_time_ms = (float)TC0_Capture16bitChannel0Get()*(32.0/30.0);
-        g_speed_data.pwm_period_ms = (float)TC0_Capture16bitChannel1Get()*(32.0/30.0);
+        g_speed_data.pwm_high_time_ms = (float)TC0_Capture16bitChannel0Get()*g_TickTomsConstant;
+        g_speed_data.pwm_period_ms = (float)TC0_Capture16bitChannel1Get()*g_TickTomsConstant;
         g_speed_data.speedDutyCycle = (g_speed_data.pwm_high_time_ms)/(g_speed_data.pwm_period_ms);
     }
 }
@@ -47,6 +48,7 @@ static void TC0_test_handler(TC_CAPTURE_STATUS zStatus, uintptr_t context)
 /* ************************************************************************** */
 uint32_t DplSpd_Init(void)
 {
+    g_TickTomsConstant = ((float)1000000.0/(float)TC0_CaptureFrequencyGet());
     TC0_CaptureCallbackRegister(TC0_test_handler, 0);
     TC0_CaptureStart();
     return 0;

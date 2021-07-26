@@ -63,16 +63,16 @@ static volatile uint32_t g_tick = 0;
 
 static void EIC_User_Handler_Ex0_Switch(uintptr_t context)
 {
-    DplBrk_SetBrake (DplBrk_GetBrake() + 100u);
+    DplBrk_SetBrake (DplBrk_GetBrake() + 1);
 }
 static void EIC_User_Handler_Ex1_Switch(uintptr_t context)
 {
-    DplBrk_SetBrake (DplBrk_GetBrake() - 100u);
+    DplBrk_SetBrake (DplBrk_GetBrake() - 1);
 }
 
 static void EIC_User_Handler_Board_Switch(uintptr_t context)
 {
-    DplBrk_SetBrake (DplBrk_GetBrake() - 100u);
+    NVIC_SystemReset();
 }
 
 // *****************************************************************************
@@ -84,6 +84,7 @@ int main ( void )
 {
     /* Initialize all modules */
     SYS_Initialize(NULL);
+    LED0_Clear();
     
     EIC_CallbackRegister(EIC_PIN_3,EIC_User_Handler_Ex1_Switch, 0);
     EIC_CallbackRegister(EIC_PIN_4,EIC_User_Handler_Ex0_Switch, 0);
@@ -99,8 +100,9 @@ int main ( void )
         while (1)
         {}
     }
-
-    TCC0_REGS->TCC_CC[2] = 7500;
+    SYSTICK_DelayMs(500);
+    
+    DplBrk_SetBrake(50.0);
     
     while ( true )
     {

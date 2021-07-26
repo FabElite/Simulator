@@ -24,8 +24,7 @@
 /* ************************************************************************** */
 /* Section: Included Files                                                    */
 /* ************************************************************************** */
-void DplHmi_init(void);
-void DplHmi_mngBoardLed( void );
+void DplHmi_Init(void);
 bool DplHmi_PrintOut(const void  *pstringPointer, uint32_t zSize);
 #endif /* DPLHMI_H */
 

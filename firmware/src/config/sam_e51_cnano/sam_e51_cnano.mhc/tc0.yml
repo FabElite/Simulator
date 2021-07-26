@@ -155,7 +155,7 @@ children:
       - type: String
         attributes: {id: text}
         children:
-        - {type: Value, value: '**** Compare Period is 25.6 us ****'}
+        - {type: Value, value: '**** Compare Period is 6.4 us ****'}
   - type: File
     attributes: {id: TC_COMPARE_SOURCE}
     children:
@@ -178,14 +178,14 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '5'}
+        attributes: {value: '4'}
   - type: Integer
     attributes: {id: TC_FREQUENCY}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: tc0, value: '937500'}
+        attributes: {id: tc0, value: '3750000'}
   - type: Combo
     attributes: {id: TC_OPERATION_MODE}
     children:
@@ -201,7 +201,7 @@ children:
       - type: String
         attributes: {id: text}
         children:
-        - {type: Value, value: '****Timer resolution is 1066.66666667 nS****'}
+        - {type: Value, value: '****Timer resolution is 266.666666667 nS****'}
   - type: File
     attributes: {id: TC_TIMER_HEADER}
     children:
@@ -232,7 +232,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: tc0, value: '937'}
+        attributes: {id: tc0, value: '3750'}
   - type: File
     attributes: {id: TC_TIMER_SOURCE}
     children:
@@ -250,7 +250,7 @@ children:
       - type: Float
         attributes: {id: max}
         children:
-        - {type: Value, value: '69.90507'}
+        - {type: Value, value: '17.476267'}
   - type: String
     attributes: {id: TIMER_PERIOD_MAX}
     children:
@@ -266,4 +266,4 @@ children:
       - type: Dynamic
         attributes: {id: tc0, value: '16'}
 - type: ElementPosition
-  attributes: {x: '565', y: '111', id: tc0}
+  attributes: {x: '564', y: '111', id: tc0}

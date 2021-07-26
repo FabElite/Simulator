@@ -83,13 +83,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 57E1F9EA5E404569BFC1A3629AEC05F2
-- generatedChecksum: B5B34056A8D23EE64F8126B2A29AAA63
+- generatedChecksum: 6F2F093FDDE58AC4674574B94E5DA5C4
   logicalPath: config/sam_e51_cnano/peripheral/port
   name: plib_port.c
   physicalPath: peripheral/port
   security: NON_SECURE
   type: SOURCE
-  userChecksum: B5B34056A8D23EE64F8126B2A29AAA63
+  userChecksum: 6F2F093FDDE58AC4674574B94E5DA5C4
 - generatedChecksum: 9DCFC294211CEDC07E3EAC2E0D389FBB
   logicalPath: config/sam_e51_cnano/peripheral/sercom/usart
   name: plib_sercom5_usart.c
@@ -104,13 +104,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 15C9B31D6C5BA096C0652A73D1AF1CD6
-- generatedChecksum: 1C828D54D9B21058A4925EA0F3CE833F
+- generatedChecksum: 32FBC6DBE24FD0CECD275F0FA1E9F412
   logicalPath: config/sam_e51_cnano/peripheral/tc
   name: plib_tc0.c
   physicalPath: peripheral/tc
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 1C828D54D9B21058A4925EA0F3CE833F
+  userChecksum: 32FBC6DBE24FD0CECD275F0FA1E9F412
 - generatedChecksum: E2B49A2E9E3D18C3C197D9CFCD60B8D6
   logicalPath: config/sam_e51_cnano/peripheral/tcc
   name: plib_tcc0.c
@@ -691,7 +691,7 @@ files:
   physicalPath: peripheral/systick
   security: NON_SECURE
   type: HEADER
-  userChecksum: 351E4E1AEDA50E9DDAE24544AD21FE1E
+  userChecksum: 5B92FB884807E32FEA22BDB2637BEBFA
 - generatedChecksum: 1A1FBB656DE054F880E4E9807FA37970
   logicalPath: config/sam_e51_cnano/peripheral/tc
   name: plib_tc0.h
@@ -1100,7 +1100,7 @@ settings:
   delimiter: ''
   key: heap-size
   security: NON_SECURE
-  value: '512'
+  value: '1024'
 - append: false
   category: C32-LD
   delimiter: ''

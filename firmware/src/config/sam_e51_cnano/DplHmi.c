@@ -38,14 +38,9 @@ static void usartDmaChannelHandler(DMAC_TRANSFER_EVENT event, uintptr_t contextH
 /* ************************************************************************** */
 /* Section: File Scope or Global Data                                         */
 /* ************************************************************************** */
-void DplHmi_init(void)
+void DplHmi_Init(void)
 {    
     DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, usartDmaChannelHandler, 0);
-}
-
-void DplHmi_mngBoardLed(void)
-{
-    LED0_Toggle();
 }
 
 bool DplHmi_PrintOut(const void *pstringPointer, uint32_t zSize)
