@@ -43,6 +43,7 @@
             <logicalFolder name="f12" displayName="tc" projectFiles="true">
               <itemPath>../src/config/sam_e51_cnano/peripheral/tc/plib_tc_common.h</itemPath>
               <itemPath>../src/config/sam_e51_cnano/peripheral/tc/plib_tc0.h</itemPath>
+              <itemPath>../src/config/sam_e51_cnano/peripheral/tc/plib_tc1.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f11" displayName="tcc" projectFiles="true">
               <itemPath>../src/config/sam_e51_cnano/peripheral/tcc/plib_tcc0.h</itemPath>
@@ -211,6 +212,7 @@
         <itemPath>../src/config/sam_e51_cnano/sam_e51_cnano.mhc/sercom5.yml</itemPath>
         <itemPath>../src/config/sam_e51_cnano/sam_e51_cnano.mhc/settings.yml</itemPath>
         <itemPath>../src/config/sam_e51_cnano/sam_e51_cnano.mhc/tc0.yml</itemPath>
+        <itemPath>../src/config/sam_e51_cnano/sam_e51_cnano.mhc/tc1.yml</itemPath>
         <itemPath>../src/config/sam_e51_cnano/sam_e51_cnano.mhc/tcc0.yml</itemPath>
       </logicalFolder>
       <itemPath>Makefile</itemPath>
@@ -279,6 +281,7 @@
             </logicalFolder>
             <logicalFolder name="f12" displayName="tc" projectFiles="true">
               <itemPath>../src/config/sam_e51_cnano/peripheral/tc/plib_tc0.c</itemPath>
+              <itemPath>../src/config/sam_e51_cnano/peripheral/tc/plib_tc1.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f11" displayName="tcc" projectFiles="true">
               <itemPath>../src/config/sam_e51_cnano/peripheral/tcc/plib_tcc0.c</itemPath>
@@ -1579,7 +1582,7 @@
         <property key="memories.rww" value="true"/>
         <property key="poweroptions.powerenable" value="false"/>
         <property key="programmerToGoFilePath"
-                  value="C:/Users/fossato/Documents/Repo/SAME51_VolanoVirtuale/firmware/sam_e51_cnano.X/debug/sam_e51_cnano/sam_e51_cnano_ptg"/>
+                  value="D:/MBOs_work/reference_apps/apps/sam_e51_cnano/same51n_getting_started/firmware/sam_e51_cnano.X/debug/sam_e51_cnano/sam_e51_cnano_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"

@@ -65,6 +65,7 @@ void EIC_EXTINT_4_InterruptHandler (void);
 void EIC_EXTINT_15_InterruptHandler (void);
 void DMAC_0_InterruptHandler (void);
 void TC0_CaptureInterruptHandler (void);
+void TC1_TimerInterruptHandler (void);
 
 
 

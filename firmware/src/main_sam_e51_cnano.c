@@ -93,7 +93,7 @@ int main ( void )
     
     DplBrk_Init();
     DplSpd_Init();
-    AplHmi_init();
+    AplHmi_Init();
     // controllo che la FPU sia attiva
     if (SCB_GetFPUType() != 1)
     {

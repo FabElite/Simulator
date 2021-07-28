@@ -1,11 +1,14 @@
 
 #include "AplHmi.h"
+#include "DplSpd.h"
 #include "DplSch.h"
 #include "DplHmi.h"
 #include "peripheral/systick/plib_systick.h"
+#include "peripheral/tc/plib_tc1.h"
 
 #define TASK_NUM (1)
 
+#define PERIOD_3MS        (3)
 #define PERIOD_50MS      (50)
 #define PERIOD_100MS    (100)
 #define PERIOD_250MS    (250)
@@ -22,13 +25,18 @@ typedef struct task {
 task tasks[TASK_NUM]=
 {
     // period       lastTick        pointer
-    {PERIOD_100MS,             0,     &AplHmiMng}
+    {PERIOD_100MS,          0,     &AplHmi_Mng}
 };
 
 
 void DplSch_run(void)
 {
     volatile static uint32_t yActualCounterValue;
+    volatile static uint16_t yTestCiao;
+    
+    yTestCiao = TC1_Timer16bitCounterGet();
+    if (yTestCiao != 0)
+        __NOP();
     // Heart of the scheduler code
     for (int i=0; i < TASK_NUM; ++i)
     {

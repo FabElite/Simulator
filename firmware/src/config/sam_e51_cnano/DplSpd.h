@@ -32,6 +32,7 @@ typedef struct speed_data
     float pwm_period_ms;
     float pwm_high_time_ms;
     float speedDutyCycle;
+    uint32_t counterNewData;
 } speed_data;
 
 

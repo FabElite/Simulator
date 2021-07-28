@@ -6,20 +6,20 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 9D5EE038B893127B787BC03DFA6B467F
-- generatedChecksum: FD5172EE8EE8B710C1F8E260DB65A701
+- generatedChecksum: 0479B3BFD73C85F20763F8DD60810286
   logicalPath: config/sam_e51_cnano
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: FD5172EE8EE8B710C1F8E260DB65A701
-- generatedChecksum: 6AE2E1EAA543D7F6DF7CBFBC8CB40FB0
+  userChecksum: 0479B3BFD73C85F20763F8DD60810286
+- generatedChecksum: AF204008E514D1304B4A6D925900607A
   logicalPath: config/sam_e51_cnano
   name: interrupts.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 6AE2E1EAA543D7F6DF7CBFBC8CB40FB0
+  userChecksum: AF204008E514D1304B4A6D925900607A
 - generatedChecksum: 6513F2461B8F476B68CA73906086047F
   logicalPath: config/sam_e51_cnano
   name: libc_syscalls.c
@@ -34,13 +34,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: null
-- generatedChecksum: 1630099EFC9EACFB3E9CE00DEEFF53CE
+- generatedChecksum: A8FD8760ED896749EB0474CC6D90BBF1
   logicalPath: config/sam_e51_cnano/peripheral/clock
   name: plib_clock.c
   physicalPath: peripheral/clock
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 1630099EFC9EACFB3E9CE00DEEFF53CE
+  userChecksum: A8FD8760ED896749EB0474CC6D90BBF1
 - generatedChecksum: D903E8D9DCBC4107D0AA841E07F653BA
   logicalPath: config/sam_e51_cnano/peripheral/cmcc
   name: plib_cmcc.c
@@ -69,13 +69,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 1D6851638DADDDD827F9331FF838A574
-- generatedChecksum: A5156365E00768C6114E12C5A5E1AC0E
+- generatedChecksum: 22838144A6C3DC74FB10080AF1A02572
   logicalPath: config/sam_e51_cnano/peripheral/nvic
   name: plib_nvic.c
   physicalPath: peripheral/nvic
   security: NON_SECURE
   type: SOURCE
-  userChecksum: A5156365E00768C6114E12C5A5E1AC0E
+  userChecksum: 22838144A6C3DC74FB10080AF1A02572
 - generatedChecksum: 57E1F9EA5E404569BFC1A3629AEC05F2
   logicalPath: config/sam_e51_cnano/peripheral/nvmctrl
   name: plib_nvmctrl.c
@@ -111,6 +111,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 32FBC6DBE24FD0CECD275F0FA1E9F412
+- generatedChecksum: C5F0CF4805947F20B6C35A7FC491579C
+  logicalPath: config/sam_e51_cnano/peripheral/tc
+  name: plib_tc1.c
+  physicalPath: peripheral/tc
+  security: NON_SECURE
+  type: SOURCE
+  userChecksum: C5F0CF4805947F20B6C35A7FC491579C
 - generatedChecksum: E2B49A2E9E3D18C3C197D9CFCD60B8D6
   logicalPath: config/sam_e51_cnano/peripheral/tcc
   name: plib_tcc0.c
@@ -349,13 +356,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: A53FD822A0DB1BCE06AB3B32E929E5E2
-- generatedChecksum: 0767D077EFD36260720A469E7CD2A723
+- generatedChecksum: EB534301448ADF0E64DA8CD569623105
   logicalPath: config/sam_e51_cnano
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: 0767D077EFD36260720A469E7CD2A723
+  userChecksum: EB534301448ADF0E64DA8CD569623105
 - generatedChecksum: CB14434C0E245529DDD9AFEAE3CA6AF1
   logicalPath: config/sam_e51_cnano
   name: device.h
@@ -503,13 +510,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 4693BBF4AEC1A855609768D5BD4708F8
-- generatedChecksum: 3F3F23747AD68A391C374BD70F6D0AF5
+- generatedChecksum: 4F8C643C7544C817A19629CA84052080
   logicalPath: config/sam_e51_cnano
   name: interrupts.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: 3F3F23747AD68A391C374BD70F6D0AF5
+  userChecksum: 4F8C643C7544C817A19629CA84052080
 - generatedChecksum: BC7DDF48FB0F859F260CF0E020CAEAED
   logicalPath: packs/ATSAME51J20A_DFP/component
   name: mclk.h
@@ -699,6 +706,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 1A1FBB656DE054F880E4E9807FA37970
+- generatedChecksum: 8522652B5953BC7F904CB1EBC90A72F8
+  logicalPath: config/sam_e51_cnano/peripheral/tc
+  name: plib_tc1.h
+  physicalPath: peripheral/tc
+  security: NON_SECURE
+  type: HEADER
+  userChecksum: 8522652B5953BC7F904CB1EBC90A72F8
 - generatedChecksum: C0A6E5B99D379FC08247B5FA465A54B3
   logicalPath: config/sam_e51_cnano/peripheral/tc
   name: plib_tc_common.h

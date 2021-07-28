@@ -31,8 +31,8 @@
 // *****************************************************************************
 // Section: Interface Functions
 // *****************************************************************************
-void AplHmi_init (void);
-void AplHmiMng (void);
+void AplHmi_Init (void);
+void AplHmi_Mng (void);
 
 
 

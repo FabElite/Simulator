@@ -35,7 +35,7 @@ static uint8_t guartTxBuffer[100];
 /* ************************************************************************** */
 // Section: Interface Functions                                               */
 /* ************************************************************************** */
-void AplHmi_init (void)
+void AplHmi_Init (void)
 {
     sprintf((char*)guartTxBuffer, "\r\n----> INIZIO PROGRAMMA <----\r\n");
     
@@ -43,7 +43,7 @@ void AplHmi_init (void)
     DplHmi_PrintOut(&guartTxBuffer, strlen((const char*)guartTxBuffer));
 }
 
-void AplHmiMng (void)
+void AplHmi_Mng (void)
 {
     static uint32_t zContatoreBoardLed = BOARD_LED_TIMEOUT;
     
@@ -60,7 +60,7 @@ void AplHmiMng (void)
     }
     
     // Stampo la stringa di interesse ogni 100ms.
-    sprintf((char*)guartTxBuffer, "\n\r%f;%f;%f", (float)(DplSpd_GetSpeedData().speedDutyCycle*1000), DplSpd_GetSpeedData().pwm_high_time_ms,DplSpd_GetSpeedData().pwm_period_ms);
+    sprintf((char*)guartTxBuffer, "\n\r%f;%f;%f", (float)(DplSpd_GetSpeedData().speedDutyCycle), DplSpd_GetSpeedData().pwm_high_time_ms ,DplSpd_GetSpeedData().pwm_period_ms);
     DplHmi_PrintOut(guartTxBuffer,strlen((const char*)guartTxBuffer));
 }
 /* *****************************************************************************
