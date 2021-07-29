@@ -27,13 +27,19 @@
 /* ************************************************************************** */
 /* Section: Constants & Data Types                                            */
 /* ************************************************************************** */
-typedef struct speed_data
+typedef struct raw_speed_sample{
+    float32_t speedDutyCycle;
+    uint32_t acquisition_time_ms;
+} raw_speed_sample;
+
+typedef struct raw_speed_data
 {
-    float pwm_period_ms;
-    float pwm_high_time_ms;
-    float speedDutyCycle;
+    float32_t pwm_period_ms;
+    float32_t pwm_high_time_ms;
+    float32_t speedDutyCycle;
+    uint32_t acquisition_time_ms;
     uint32_t counterNewData;
-} speed_data;
+} raw_speed_data;
 
 
 
@@ -41,9 +47,9 @@ typedef struct speed_data
 // Section: Interface Functions
 // *****************************************************************************
 
-uint32_t DplSpd_Init(void);
+void DplSpd_Init(void);
 
-speed_data DplSpd_GetSpeedData(void);
+raw_speed_data DplSpd_GetSpeedData(void);
 
 #endif /* DPLSPD_H */
 

@@ -33,8 +33,8 @@
 // *****************************************************************************
 
 uint32_t DplBrk_Init(void);
-void DplBrk_SetBrake(float zBrakePerc);
-float DplBrk_GetBrake( void );
+void DplBrk_SetBrake(float32_t zBrakePerc);
+float32_t DplBrk_GetBrake( void );
 
 #endif /* DPLBRK_H */
 

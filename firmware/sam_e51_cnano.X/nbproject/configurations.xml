@@ -235,6 +235,8 @@
           <logicalFolder name="f4" displayName="Apl" projectFiles="true">
             <itemPath>../src/config/sam_e51_cnano/AplHmi.c</itemPath>
             <itemPath>../src/config/sam_e51_cnano/AplHmi.h</itemPath>
+            <itemPath>../src/config/sam_e51_cnano/AplSpd.c</itemPath>
+            <itemPath>../src/config/sam_e51_cnano/AplSpd.h</itemPath>
           </logicalFolder>
           <logicalFolder name="f3" displayName="Dpl" projectFiles="true">
             <itemPath>../src/config/sam_e51_cnano/DplSpd.c</itemPath>

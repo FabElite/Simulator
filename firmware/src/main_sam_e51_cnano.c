@@ -55,9 +55,9 @@
 #include "definitions.h"                // SYS function prototypes
 
 #include "AplHmi.h"
+#include "AplSpd.h"
 #include "DplBrk.h"
 #include "DplSch.h"
-#include "DplSpd.h"
 
 static volatile uint32_t g_tick = 0;
 
@@ -92,7 +92,7 @@ int main ( void )
     SYSTICK_TimerStart();
     
     DplBrk_Init();
-    DplSpd_Init();
+    AplSpd_Init();
     AplHmi_Init();
     // controllo che la FPU sia attiva
     if (SCB_GetFPUType() != 1)
