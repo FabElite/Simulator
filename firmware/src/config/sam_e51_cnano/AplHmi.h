@@ -33,7 +33,7 @@
 // *****************************************************************************
 void AplHmi_Init (void);
 void AplHmi_Mng (void);
-
+void AplHmi_Println (float32_t Value0, float32_t Value1);
 
 
 #endif /* APLHMI_H */

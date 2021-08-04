@@ -1,14 +1,17 @@
 
 #include "AplHmi.h"
+#include "DplBrk.h"
 #include "DplSpd.h"
 #include "DplSch.h"
 #include "DplHmi.h"
 #include "peripheral/systick/plib_systick.h"
 #include "peripheral/tc/plib_tc1.h"
 
-#define TASK_NUM (1)
+#define TASK_NUM (2)
 
+#define PERIOD_1MS        (1)
 #define PERIOD_3MS        (3)
+#define PERIOD_10MS        (10)
 #define PERIOD_50MS      (50)
 #define PERIOD_100MS    (100)
 #define PERIOD_250MS    (250)
@@ -25,7 +28,9 @@ typedef struct task {
 task tasks[TASK_NUM]=
 {
     // period       lastTick        pointer
+    {PERIOD_10MS,            0,     &DplBrk_BrakeMng},
     {PERIOD_100MS,          0,     &AplHmi_Mng}
+    
 };
 
 

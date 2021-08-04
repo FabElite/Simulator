@@ -67,7 +67,16 @@ float32_t DplBrk_GetBrake( void )
 {    
     return ((float32_t)TCC0_REGS->TCC_CC[2]/150.0);
 }
-
+void DplBrk_BrakeMng( void )
+{
+    volatile static double zTimer = 0.0;
+    volatile static float zSin;
+    
+    zSin = (double)10.0*sin((double)((double)zTimer/(double)150.0)*2*PI);    
+    DplBrk_SetBrake((float)((double)50.0 + zSin));
+    
+    zTimer = zTimer+1;
+}
 
 
 /* *****************************************************************************

@@ -60,7 +60,13 @@ void AplHmi_Mng (void)
     }
     
     // Stampo la stringa di interesse ogni 100ms.
-    sprintf((char*)guartTxBuffer, "\n\r%f;%f;%f", (float)(DplSpd_GetSpeedData().speedDutyCycle), DplSpd_GetSpeedData().pwm_high_time_ms ,DplSpd_GetSpeedData().pwm_period_ms);
+    //sprintf((char*)guartTxBuffer, "\n\r%f;%f;%f", (float)(DplSpd_GetNewSpeedData().speedkmh), DplSpd_GetNewSpeedData().pwm_high_time_ms ,DplSpd_GetNewSpeedData().pwm_period_ms);
+    //DplHmi_PrintOut(guartTxBuffer,strlen((const char*)guartTxBuffer));
+}
+
+void AplHmi_Println (float32_t Value0, float32_t Value1)
+{
+    sprintf((char*)guartTxBuffer, "\n\r%f;%f", Value0, Value1);
     DplHmi_PrintOut(guartTxBuffer,strlen((const char*)guartTxBuffer));
 }
 /* *****************************************************************************

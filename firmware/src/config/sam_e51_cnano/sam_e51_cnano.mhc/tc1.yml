@@ -124,4 +124,4 @@ children:
       - type: User
         attributes: {value: '3.0'}
 - type: ElementPosition
-  attributes: {x: '565', y: '202', id: tc1}
+  attributes: {x: '564', y: '203', id: tc1}

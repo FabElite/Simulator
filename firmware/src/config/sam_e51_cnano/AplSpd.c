@@ -16,7 +16,9 @@
 /* ************************************************************************** */
 
 #include "AplSpd.h"
+#include "AplHmi.h"
 #include "DplSpd.h"
+#include "peripheral/tc/plib_tc2.h"
 /* ************************************************************************** */
 /* ************************************************************************** */
 /* Section: Included Files                                                    */
@@ -24,25 +26,48 @@
 /* ************************************************************************** */
 #define FILTER_ORDER (3)
 #define ARRAY_DIMESION (FILTER_ORDER*2+1)
+#define DECIMATORE (50)
 
-float32_t a[ARRAY_DIMESION] =  {1, -5.974537726669403, 14.87593090869705, -19.75830093440877, 14.76469664819539, -5.88552548497545, 0.9777365894103591};
-float32_t b[ARRAY_DIMESION] =  {1.659679040416131e-06, 0, -4.979037121248392e-06, 0, 4.979037121248392e-06, 0, -1.659679040416131e-06};
+float32_t a[ARRAY_DIMESION] =  {1, -3.715705136675553, 6.844048006251084, -7.775665435282946, 5.779749696018359, -2.640774843037108, 0.604948500073028};
+float32_t b[ARRAY_DIMESION] =  {0.01556498175509638, 0, -0.04669494526528914, 0, 0.04669494526528914, 0, -0.01556498175509638};
 
 raw_speed_sample in_spd[ARRAY_DIMESION];
 raw_speed_sample out_spd[ARRAY_DIMESION];
+volatile static float32_t cadence_rpm = 0;
+
+raw_speed_sample new_acc_filt;
+raw_speed_sample zNuovoValoreFiltrato;
+    
+const float MINAMPLITUDE = 20/100;
 
 /* ************************************************************************** */
 /* Section: File Scope or Global Data                                         */
 /* ************************************************************************** */
 static bool cadence_algoritm (void);
-
+static void cadence_process_new_acc_data(raw_speed_data z_new_speed_data);
+static void TC2_Sampler_Timer(TC_TIMER_STATUS status, uintptr_t context);
 /* ************************************************************************** */
 // Section: Local Functions                                                   */
 /* ************************************************************************** */
 
-static void cadence_process_new_acc_data(void)
+static void TC2_Sampler_Timer(TC_TIMER_STATUS status, uintptr_t context)
 {
-    raw_speed_sample zNuovoValoreFiltrato;
+    static uint32_t zContatoreCampioni = 0;
+    
+    if (DplSpd_IsThereNewData())
+    {
+        raw_speed_data zNewData = DplSpd_GetNewSpeedData();
+        
+        if ( (zContatoreCampioni % DECIMATORE) == 0)
+        {
+            cadence_process_new_acc_data(zNewData);
+        }
+        zContatoreCampioni++;
+    }
+}
+
+static void cadence_process_new_acc_data(raw_speed_data z_new_speed_data)
+{
     
     // sposto tutte le posizioni degli input/output
 	for (int i = 0; i < (ARRAY_DIMESION-1); i++)
@@ -50,19 +75,21 @@ static void cadence_process_new_acc_data(void)
 		out_spd[i] = out_spd[i+1];
 		in_spd[i] = in_spd[i+1];
 	}
-    in_spd[ARRAY_DIMESION-1].speedDutyCycle = g_new_speed_data.speedDutyCycle;
-    in_spd[ARRAY_DIMESION-1].acquisition_time_ms = g_new_speed_data.acquisition_time_ms;
+    in_spd[ARRAY_DIMESION-1].speedkmh = z_new_speed_data.speedkmh;
+    in_spd[ARRAY_DIMESION-1].acquisition_time_ms = z_new_speed_data.acquisition_time_ms;
     
-    zNuovoValoreFiltrato.speedDutyCycle = ( b[0] * g_new_speed_data.speedDutyCycle );
-    zNuovoValoreFiltrato.acquisition_time_ms = g_new_speed_data.acquisition_time_ms;
+    zNuovoValoreFiltrato.speedkmh = ( b[0] * z_new_speed_data.speedkmh );
+    zNuovoValoreFiltrato.acquisition_time_ms = z_new_speed_data.acquisition_time_ms;
     
     for (int i = 1; i <= (ARRAY_DIMESION-1); i++)
 	{
-		zNuovoValoreFiltrato.speedDutyCycle += ( b[i] * in_spd[(ARRAY_DIMESION-1)-i].speedDutyCycle );
-		zNuovoValoreFiltrato.speedDutyCycle -= ( a[i] * out_spd[(ARRAY_DIMESION-1)-i].speedDutyCycle ) ;
+		zNuovoValoreFiltrato.speedkmh += ( b[i] * in_spd[(ARRAY_DIMESION-1)-i].speedkmh );
+		zNuovoValoreFiltrato.speedkmh -= ( a[i] * out_spd[(ARRAY_DIMESION-1)-i].speedkmh ) ;
 	}
     
     out_spd[ARRAY_DIMESION-1] = zNuovoValoreFiltrato;
+    AplHmi_Println(z_new_speed_data.speedkmh, zNuovoValoreFiltrato.speedkmh);
+    cadence_algoritm();
 }
 
 static bool cadence_algoritm (void)
@@ -72,21 +99,22 @@ static bool cadence_algoritm (void)
 	static uint32_t new_zero_crossing = 0;
 	static float32_t delta_zero_crossing_in_sec = 0;
 	static uint32_t delta_zero_crossing;
-	static float32_t cadence_rpm = 0;
 	
-    raw_speed_sample new_acc_filt = out_spd[ARRAY_DIMESION-1];
+
+    new_acc_filt = out_spd[ARRAY_DIMESION-1];
     raw_speed_sample old_acc_filt = out_spd[ARRAY_DIMESION-2];
     
     // se supero una soglia minima durante una rotazione setto la flag di superamento della
 	// soglia minima a 1
     // qui va messo il valore minimo di ampiezza di velocità che si considera accettabile
-	if (new_acc_filt.speedDutyCycle > 0)
+    
+	if ( (new_acc_filt.speedkmh) > ((float32_t)0.02) )
 	{
 		fl_reached_min_pos_treashould = true;
 	}
 
 	// entro qui solo se ho attraverso positivamente lo 0
-	if ( (old_acc_filt.speedDutyCycle<0) && (new_acc_filt.speedDutyCycle >0) )
+	if ( (old_acc_filt.speedkmh<0) && (new_acc_filt.speedkmh >0) )
 	{
 		old_zero_crossing = new_zero_crossing;
 		new_zero_crossing = new_acc_filt.acquisition_time_ms;
@@ -145,9 +173,9 @@ static bool cadence_algoritm (void)
 void AplSpd_Init(void)
 {
     DplSpd_Init();
-    
+    TC2_TimerCallbackRegister(TC2_Sampler_Timer, 0);
+    TC2_TimerStart();
 }
-
 /* *****************************************************************************
  End of File
  */

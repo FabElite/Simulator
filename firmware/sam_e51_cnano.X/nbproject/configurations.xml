@@ -44,6 +44,7 @@
               <itemPath>../src/config/sam_e51_cnano/peripheral/tc/plib_tc_common.h</itemPath>
               <itemPath>../src/config/sam_e51_cnano/peripheral/tc/plib_tc0.h</itemPath>
               <itemPath>../src/config/sam_e51_cnano/peripheral/tc/plib_tc1.h</itemPath>
+              <itemPath>../src/config/sam_e51_cnano/peripheral/tc/plib_tc2.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f11" displayName="tcc" projectFiles="true">
               <itemPath>../src/config/sam_e51_cnano/peripheral/tcc/plib_tcc0.h</itemPath>
@@ -213,6 +214,7 @@
         <itemPath>../src/config/sam_e51_cnano/sam_e51_cnano.mhc/settings.yml</itemPath>
         <itemPath>../src/config/sam_e51_cnano/sam_e51_cnano.mhc/tc0.yml</itemPath>
         <itemPath>../src/config/sam_e51_cnano/sam_e51_cnano.mhc/tc1.yml</itemPath>
+        <itemPath>../src/config/sam_e51_cnano/sam_e51_cnano.mhc/tc2.yml</itemPath>
         <itemPath>../src/config/sam_e51_cnano/sam_e51_cnano.mhc/tcc0.yml</itemPath>
       </logicalFolder>
       <itemPath>Makefile</itemPath>
@@ -284,6 +286,7 @@
             <logicalFolder name="f12" displayName="tc" projectFiles="true">
               <itemPath>../src/config/sam_e51_cnano/peripheral/tc/plib_tc0.c</itemPath>
               <itemPath>../src/config/sam_e51_cnano/peripheral/tc/plib_tc1.c</itemPath>
+              <itemPath>../src/config/sam_e51_cnano/peripheral/tc/plib_tc2.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f11" displayName="tcc" projectFiles="true">
               <itemPath>../src/config/sam_e51_cnano/peripheral/tcc/plib_tcc0.c</itemPath>
@@ -450,7 +453,7 @@
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="heap-size" value="1024"/>
+        <property key="heap-size" value="2048"/>
         <property key="input-libraries" value=""/>
         <property key="kseg-length" value=""/>
         <property key="kseg-origin" value=""/>
@@ -1583,8 +1586,6 @@
         <property key="memories.programmemory.ranges" value="0-fffff"/>
         <property key="memories.rww" value="true"/>
         <property key="poweroptions.powerenable" value="false"/>
-        <property key="programmerToGoFilePath"
-                  value="D:/MBOs_work/reference_apps/apps/sam_e51_cnano/same51n_getting_started/firmware/sam_e51_cnano.X/debug/sam_e51_cnano/sam_e51_cnano_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"

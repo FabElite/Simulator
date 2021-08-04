@@ -27,16 +27,16 @@
 /* ************************************************************************** */
 /* Section: Constants & Data Types                                            */
 /* ************************************************************************** */
-typedef struct raw_speed_sample{
-    float32_t speedDutyCycle;
+typedef struct t_raw_speed_sample{
+    float32_t speedkmh;
     uint32_t acquisition_time_ms;
 } raw_speed_sample;
 
-typedef struct raw_speed_data
+typedef struct t_raw_speed_data
 {
     float32_t pwm_period_ms;
     float32_t pwm_high_time_ms;
-    float32_t speedDutyCycle;
+    float32_t speedkmh;
     uint32_t acquisition_time_ms;
     uint32_t counterNewData;
 } raw_speed_data;
@@ -48,8 +48,8 @@ typedef struct raw_speed_data
 // *****************************************************************************
 
 void DplSpd_Init(void);
-
-raw_speed_data DplSpd_GetSpeedData(void);
+bool DplSpd_IsThereNewData(void);
+raw_speed_data DplSpd_GetNewSpeedData(void);
 
 #endif /* DPLSPD_H */
 

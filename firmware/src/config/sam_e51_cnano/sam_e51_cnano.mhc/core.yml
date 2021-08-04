@@ -737,14 +737,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: Integer
     attributes: {id: GCLK_ID_26_FREQ}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0'}
+        attributes: {id: core, value: '60000000'}
   - type: Boolean
     attributes: {id: GCLK_ID_29_CHEN}
     children:
@@ -865,7 +865,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0x188d6'}
+        attributes: {id: core, value: '0x1a8d6'}
   - type: String
     attributes: {id: MCLK_APBC_INITIAL_VALUE}
     children:
@@ -1068,21 +1068,21 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: String
     attributes: {id: NVIC_109_0_HANDLER}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: TC2_Handler}
+        attributes: {id: core, value: TC2_TimerInterruptHandler}
   - type: Boolean
     attributes: {id: NVIC_109_0_HANDLER_LOCK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: Boolean
     attributes: {id: NVIC_11_0_ENABLE}
     children:
@@ -3074,20 +3074,48 @@ children:
       children:
       - type: Dynamic
         attributes: {id: tc1, value: 'true'}
+  - type: Boolean
+    attributes: {id: TC2_CLOCK_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: tc2, value: 'true'}
   - type: Integer
     attributes: {id: TC2_CLOCK_FREQUENCY}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0'}
+        attributes: {id: core, value: '60000000'}
+  - type: Boolean
+    attributes: {id: TC2_INTERRUPT_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: tc2, value: 'true'}
   - type: Boolean
     attributes: {id: TC2_INTERRUPT_ENABLE_UPDATE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
+  - type: String
+    attributes: {id: TC2_INTERRUPT_HANDLER}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: tc2, value: TC2_TimerInterruptHandler}
+  - type: Boolean
+    attributes: {id: TC2_INTERRUPT_HANDLER_LOCK}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: tc2, value: 'true'}
   - type: Boolean
     attributes: {id: TCC0_CLOCK_ENABLE}
     children:

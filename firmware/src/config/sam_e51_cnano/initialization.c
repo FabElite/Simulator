@@ -146,6 +146,8 @@ void SYS_Initialize ( void* data )
 
     TC0_CaptureInitialize();
 
+    TC2_TimerInitialize();
+
 
 
 
