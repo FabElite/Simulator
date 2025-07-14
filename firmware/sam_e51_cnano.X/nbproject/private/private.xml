@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_EMULATORE/firmware/src/config/sam_e51_cnano/AplHmi.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_EMULATORE/firmware/src/config/sam_e51_cnano/DplSpd.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_EMULATORE/firmware/src/main_sam_e51_cnano.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_EMULATORE/firmware/src/config/sam_e51_cnano/peripheral/port/plib_port.h</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_EMULATORE/firmware/src/config/sam_e51_cnano/AplSpd.h</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_EMULATORE/firmware/src/config/sam_e51_cnano/sam_e51_cnano.mhc/core.yml</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_EMULATORE/firmware/src/config/sam_e51_cnano/peripheral/port/plib_port.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_EMULATORE/firmware/src/config/sam_e51_cnano/peripheral/tc/plib_tc0.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_EMULATORE/firmware/src/config/sam_e51_cnano/initialization.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_EMULATORE/firmware/src/config/sam_e51_cnano/DplSch.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_EMULATORE/firmware/src/config/sam_e51_cnano/peripheral/systick/plib_systick.c</file>
+            <file>file:/C:/Users/fossato/Documents/Repo/SAME51_EMULATORE/firmware/src/config/sam_e51_cnano/AplSpd.c</file>
+        </group>
+    </open-files>
+</project-private>
