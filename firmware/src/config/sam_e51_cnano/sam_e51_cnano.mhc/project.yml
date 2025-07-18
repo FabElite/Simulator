@@ -111,13 +111,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: D1E16C5BB9D56AB3B74A99CFA69E76FE
-- generatedChecksum: 323DFD77A59F3EA88192F48AC76F53FB
+- generatedChecksum: B2944D12B9CFD1F06786FE7087A0181D
   logicalPath: config/sam_e51_cnano/peripheral/tc
   name: plib_tc2.c
   physicalPath: peripheral/tc
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 323DFD77A59F3EA88192F48AC76F53FB
+  userChecksum: B2944D12B9CFD1F06786FE7087A0181D
 - generatedChecksum: F90BC31146188C748D0CEBFE196F2CAA
   logicalPath: config/sam_e51_cnano
   name: startup_xc32.c

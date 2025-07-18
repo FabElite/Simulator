@@ -48,7 +48,7 @@
 #define DEFAULT_LOW_TIME1 81730
 #define DEFAULT_LOW_TIME2 197105
 
-#define DEFAULT_TIME_OUTPUT2 600000
+#define DEFAULT_TIME_OUTPUT2 9440
 #endif
 
 static uint32_t g_high_time_output1 = DEFAULT_HIGH_TIME;
@@ -91,25 +91,25 @@ static void TC0_PWMin_Timer(TC_TIMER_STATUS status, uintptr_t context)
             TC0_Timer32bitPeriodSet(y_high_time);            
             y_status_emulator++;
             OUTPUT1_Set();
-            OUTPUT2_Set();
+            //OUTPUT2_Set();
             break;
         case 1:
             TC0_Timer32bitPeriodSet(y_low_time1);
             y_status_emulator++;
             OUTPUT1_Clear();
-            OUTPUT2_Clear();
+            //OUTPUT2_Clear();
             break;
          case 2:            
             TC0_Timer32bitPeriodSet(y_high_time);
             y_status_emulator++;
             OUTPUT1_Set();
-            OUTPUT2_Set();
+            //OUTPUT2_Set();
             break;
         case 3:            
             TC0_Timer32bitPeriodSet(y_low_time2);
             y_status_emulator=0;
             OUTPUT1_Clear();
-            OUTPUT2_Clear();
+            //OUTPUT2_Clear();
             break;
         default:
             y_status_emulator = 0;
@@ -154,12 +154,12 @@ static void TC2_PWMin_Timer(TC_TIMER_STATUS status, uintptr_t context)
         case 0:            
             TC2_Timer32bitPeriodSet(y2_high_time);            
             y2_status_emulator++;
-            //OUTPUT2_Set();
+            OUTPUT2_Set();
             break;
         case 1:
             TC2_Timer32bitPeriodSet(y2_low_time);
             y2_status_emulator=0;
-            //OUTPUT2_Clear();
+            OUTPUT2_Clear();
             break;
         default:
             y2_status_emulator = 0;
