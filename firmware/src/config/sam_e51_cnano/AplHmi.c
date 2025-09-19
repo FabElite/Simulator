@@ -132,9 +132,9 @@ void AplHmi_Mng (void)
         }*/
     }
     
-    //Stampo la stringa di interesse ogni 100ms.
-    sprintf((char*)guartTxBuffer, "\r\n%u\t\t%u", 0, 1);
-    DplHmi_PrintOut(&guartTxBuffer, strlen((const char*)guartTxBuffer));
+
+    //sprintf((char*)guartTxBuffer, "\r\n----> prova <----\r\n");
+    //DplHmi_PrintOut(&guartTxBuffer, strlen((const char*)guartTxBuffer));
 }
 /* *****************************************************************************
  End of File

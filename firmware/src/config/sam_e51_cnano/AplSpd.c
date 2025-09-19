@@ -18,6 +18,7 @@
 #include "AplSpd.h"
 #include "DplSpd.h"
 #include "peripheral/systick/plib_systick.h"
+#include "stdio.h"
 /* ************************************************************************** */
 /* ************************************************************************** */
 /* Section: Included Files                                                    */
@@ -48,7 +49,8 @@
 #define DEFAULT_LOW_TIME1 81730
 #define DEFAULT_LOW_TIME2 197105
 
-#define DEFAULT_TIME_OUTPUT2 9440
+//#define DEFAULT_TIME_OUTPUT2 9635// senza cadenza
+#define DEFAULT_TIME_OUTPUT2 9400 //con cadenza
 #endif
 
 static uint32_t g_high_time_output1 = DEFAULT_HIGH_TIME;
@@ -64,7 +66,7 @@ static uint32_t g_time_output2_default = DEFAULT_TIME_OUTPUT2;
 static uint32_t g_rpm_target = 60;
 static float g_speed_variation_index_target = 4;
 static float g_torque_variation_index_target = 10;
-    
+
 static volatile float g_speed_variation_index = 1;
 static float g_torque_variation_index = 0;
 static SimulationMode gModeOutput = NormalMode;
@@ -72,7 +74,7 @@ static bool g_CadenceEnable = 1;
 static RulloOTSType gRulloSelezionato1 = Avanti;
 static RulloNOOTSType gRulloSelezionato2 = Suito;
 static float g_cadence_amplitude_output1 = 200.0;
-static float g_cadence_amplitude_output2 = 1000.0;
+static float g_cadence_amplitude_output2 = 100.0;
 /* ************************************************************************** */
 // Section: Local Functions                                                   */
 /* ************************************************************************** */
