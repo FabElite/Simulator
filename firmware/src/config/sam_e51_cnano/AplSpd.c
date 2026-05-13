@@ -37,6 +37,7 @@
 #define RATIO_DIRETO_XR 1210
 #define RATIO_SUITO 1240
 #define RATIO_RIVO 1270
+#define RATIO_RILLO 900
 #define CADENCE_GAP 5
 #define TORQUE_VARIATION 100
 #define RATIO_DEFAULT_OUTPUT1 RATIO_AVANTI
@@ -182,7 +183,7 @@ static void TC2_PWMin_Timer(TC_TIMER_STATUS status, uintptr_t context)
         y2_high_time = g_time_output2 + 2.0 * (z2_normalizedPosition - 0.5);
         if (g_CadenceEnable != 0)
         {
-            y2_low_time = g_time_output2 + (uint32_t) (2.0 * (g_cadence_amplitude_output2 * (z2_normalizedPosition - 0.5) + g_cadence_amplitude_output2/2.0 ));
+            y2_low_time = (int32_t)g_time_output2 + (int32_t)(g_cadence_amplitude_output2 * (2.0f * z2_normalizedPosition - 0.5f));
         }
         else
         {
@@ -204,22 +205,16 @@ static void wavelength_update (void)
         g_torque_variation_index_target = 0;        
     }
     
-    if ( (g_speed_variation_index - g_speed_variation_index_target) < 0.1 )
-    {
-        g_speed_variation_index = g_speed_variation_index + g_speed_variation_index * 0.005;
-    }
-    if (g_speed_variation_index - g_speed_variation_index_target > 0.1 )
-    {
-        g_speed_variation_index = g_speed_variation_index - g_speed_variation_index * 0.0010;
-    }
-    if ( (g_torque_variation_index - g_torque_variation_index_target) < 0.015 )
-    {
-        g_torque_variation_index = g_torque_variation_index + 0.01;
-    }
-    if ( (g_torque_variation_index - g_torque_variation_index_target) > 0.015 )
-    {
-        g_torque_variation_index = g_torque_variation_index - 0.01;
-    }
+    if (g_speed_variation_index < g_speed_variation_index_target)
+        g_speed_variation_index += g_speed_variation_index * 0.005f;
+    else if (g_speed_variation_index > g_speed_variation_index_target)
+        g_speed_variation_index -= g_speed_variation_index * 0.001f;
+    
+    if (g_torque_variation_index < g_torque_variation_index_target)
+        g_torque_variation_index += 0.01f;
+    else if (g_torque_variation_index > g_torque_variation_index_target)
+        g_torque_variation_index -= 0.01f;
+    
     
     uint32_t z_high_time_output1 = g_high_time_output1_default;
     uint32_t z_low_time1_output1 = g_low_time1_output1_default + TORQUE_VARIATION * g_torque_variation_index;
@@ -356,7 +351,7 @@ void AplSpd_Mng (void)
             gRulloSelezionato2 = Rivo;
             break;
         case 2:
-            gRulloSelezionato2 = Suito;
+            gRulloSelezionato2 = Rillo;
             break;
         case 3:
             gRulloSelezionato2 = Suito;
@@ -394,6 +389,9 @@ void AplSpd_Mng (void)
             break;
         case Rivo:
             g_time_output2_default = DEFAULT_TIME_OUTPUT2 * RATIO_DEFAULT_OUTPUT2/RATIO_RIVO;
+            break;
+        case Rillo:
+            g_time_output2_default = DEFAULT_TIME_OUTPUT2 * RATIO_DEFAULT_OUTPUT2/RATIO_RILLO;
             break;
         default:
             g_time_output2_default = DEFAULT_TIME_OUTPUT2;

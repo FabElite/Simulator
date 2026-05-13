@@ -48,6 +48,7 @@ bool DplHmi_PrintOut(const void *pstringPointer, uint32_t zSize)
     bool zRet = 1;
     if (isUSARTTxComplete == true)
     {
+        isUSARTTxComplete = false;
         DMAC_ChannelTransfer(DMAC_CHANNEL_0, pstringPointer, \
                 (const void *)&(SERCOM5_REGS->USART_INT.SERCOM_DATA), \
                 zSize);

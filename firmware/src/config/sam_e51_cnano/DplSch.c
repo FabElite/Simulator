@@ -41,7 +41,7 @@ void DplSch_run(void)
        yActualCounterValue = SYSTICK_TickCounterGet();
        if (yActualCounterValue >= tasks[i].lastTick + tasks[i].periodms)
        {
-          tasks[i].lastTick = yActualCounterValue;
+          tasks[i].lastTick += tasks[i].periodms;
           tasks[i].TickFct();
        }
     }

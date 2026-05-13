@@ -39,7 +39,7 @@
 
 typedef enum SimulationMode{NormalMode,Spindown_ModeSlowSpeed, Spindown_ModeHighSpeed} SimulationMode;
 typedef enum RulloOTSType{Avanti, Justo, DiretoXR} RulloOTSType;
-typedef enum RulloNOOTSType{Suito, Rivo} RulloNOOTSType;
+typedef enum RulloNOOTSType{Suito, Rivo, Rillo} RulloNOOTSType;
 // *****************************************************************************
 // *****************************************************************************
 // Section: Interface Functions

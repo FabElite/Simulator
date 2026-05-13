@@ -41,7 +41,7 @@ void AplHmi_Init (void)
     sprintf((char*)guartTxBuffer, "\r\n----> INIZIO PROGRAMMA <----\r\n");
     
     DplHmi_Init();
-    DplHmi_PrintOut(&guartTxBuffer, strlen((const char*)guartTxBuffer));
+    DplHmi_PrintOut(guartTxBuffer, strlen((const char*)guartTxBuffer));
 }
 
 void AplHmi_Mng (void)
@@ -134,7 +134,7 @@ void AplHmi_Mng (void)
     
 
     //sprintf((char*)guartTxBuffer, "\r\n----> prova <----\r\n");
-    //DplHmi_PrintOut(&guartTxBuffer, strlen((const char*)guartTxBuffer));
+    //DplHmi_PrintOut(guartTxBuffer, strlen((const char*)guartTxBuffer));
 }
 /* *****************************************************************************
  End of File

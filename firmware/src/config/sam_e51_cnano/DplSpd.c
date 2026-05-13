@@ -32,7 +32,6 @@
 float32_t g_TickTomsConstant;
 raw_speed_data g_new_speed_data;
 bool gNewDataReady = true;
-float32_t g_TickTomsConstant;
 /* ************************************************************************** */
 // Section: Local Functions Prototype                                         */
 /* ************************************************************************** */
