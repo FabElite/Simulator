@@ -60,7 +60,6 @@
 #include "peripheral/eic/plib_eic.h"
 #include "peripheral/tc/plib_tc0.h"
 #include "peripheral/tc/plib_tc2.h"
-#include "arm_math.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -71,7 +70,7 @@ extern "C" {
 // DOM-IGNORE-END
 
 /* CPU clock frequency */
-#define CPU_CLOCK_FREQUENCY 100000000
+#define CPU_CLOCK_FREQUENCY 0
 
 // *****************************************************************************
 // *****************************************************************************

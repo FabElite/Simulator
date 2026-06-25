@@ -45,7 +45,7 @@
 *******************************************************************************/
 // DOM-IGNORE-END
 
-#ifndef PLIB_TC0_H      // Guards against multiple inclusion
+#ifndef PLIB_TC0_H       // Guards against multiple inclusion
 #define PLIB_TC0_H
 
 // *****************************************************************************
@@ -85,31 +85,29 @@
    this interface.
 */
 
-// *****************************************************************************
 
-void TC0_TimerInitialize( void );
+void TC0_CompareInitialize( void );
 
-void TC0_TimerStart( void );
+void TC0_CompareStart( void );
 
-void TC0_TimerStop( void );
+void TC0_CompareStop( void );
 
-uint32_t TC0_TimerFrequencyGet( void );
+uint32_t TC0_CompareFrequencyGet( void );
 
+uint32_t TC0_Compare32bitPeriodGet( void );
 
-void TC0_Timer32bitPeriodSet( uint32_t period );
+uint32_t TC0_Compare32bitCounterGet( void );
 
-uint32_t TC0_Timer32bitPeriodGet( void );
+void TC0_Compare32bitCounterSet( uint32_t count );
 
-uint32_t TC0_Timer32bitCounterGet( void );
+bool TC0_Compare32bitMatch0Set( uint32_t compareValue );
 
-void TC0_Timer32bitCounterSet( uint32_t count );
-
-
-
-void TC0_TimerCallbackRegister( TC_TIMER_CALLBACK callback, uintptr_t context );
+bool TC0_Compare32bitMatch1Set( uint32_t compareValue );
 
 
-void TC0_TimerCommandSet(TC_COMMAND command);
+TC_COMPARE_STATUS TC0_CompareStatusGet( void );
+
+void TC0_CompareCommandSet(TC_COMMAND command);
 
 
 // DOM-IGNORE-BEGIN

@@ -1403,7 +1403,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
       - type: User
         attributes: {value: 'true'}
   - type: String
@@ -1412,7 +1412,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: TC0_TimerInterruptHandler}
+        attributes: {id: core, value: TC0_Handler}
       - type: User
         attributes: {value: TC0_TimerInterruptHandler}
   - type: Boolean
@@ -1421,7 +1421,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
   - type: Combo
     attributes: {id: NVIC_107_0_PRIORITY}
     children:
@@ -1476,7 +1476,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: TC2_TimerInterruptHandler}
+        attributes: {id: core, value: TC2_CompareInterruptHandler}
       - type: User
         attributes: {value: TC2_TimerInterruptHandler}
   - type: Boolean
@@ -4737,7 +4737,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: tc0, value: 'true'}
+        attributes: {id: tc0, value: 'false'}
   - type: Boolean
     attributes: {id: TC0_INTERRUPT_ENABLE_UPDATE}
     children:
@@ -4751,14 +4751,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: tc0, value: TC0_TimerInterruptHandler}
+        attributes: {id: tc0, value: TC0_Handler}
   - type: Boolean
     attributes: {id: TC0_INTERRUPT_HANDLER_LOCK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: tc0, value: 'true'}
+        attributes: {id: tc0, value: 'false'}
   - type: Boolean
     attributes: {id: TC1_CLOCK_ENABLE}
     children:
@@ -4837,7 +4837,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: tc2, value: TC2_TimerInterruptHandler}
+        attributes: {id: tc2, value: TC2_CompareInterruptHandler}
   - type: Boolean
     attributes: {id: TC2_INTERRUPT_HANDLER_LOCK}
     children:

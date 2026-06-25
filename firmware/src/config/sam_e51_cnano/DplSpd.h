@@ -23,6 +23,7 @@
 /* Section: Included Files                                                    */
 /* ************************************************************************** */
 #include "definitions.h"                // SYS function prototypes
+#include "arm_math.h"
 
 /* ************************************************************************** */
 /* Section: Constants & Data Types                                            */

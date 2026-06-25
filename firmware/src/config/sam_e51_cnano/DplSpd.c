@@ -51,10 +51,9 @@ bool gNewDataReady = true;
 /* ************************************************************************** */
 void DplSpd_Init()
 {
-    TC0_TimerStart();
-    TC2_TimerStart();
+    TC0_CompareStart();
+    TC2_CompareStart();
 }
-
 
 bool DplSpd_IsThereNewData(void)
 {

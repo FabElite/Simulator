@@ -141,10 +141,10 @@ void SYS_Initialize ( void* data )
     EIC_Initialize();
 
 
-    TC0_TimerInitialize();
+    TC0_CompareInitialize();
 
 
-    TC2_TimerInitialize();
+    TC2_CompareInitialize();
 
 
 

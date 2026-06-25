@@ -62,7 +62,7 @@
 // *****************************************************************************
 // *****************************************************************************
 
-static TC_TIMER_CALLBACK_OBJ TC2_CallbackObject;
+static TC_COMPARE_CALLBACK_OBJ TC2_CallbackObject;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -70,9 +70,8 @@ static TC_TIMER_CALLBACK_OBJ TC2_CallbackObject;
 // *****************************************************************************
 // *****************************************************************************
 
-// *****************************************************************************
-/* Initialize the TC module in Timer mode */
-void TC2_TimerInitialize( void )
+/* Initialize TC module in Compare Mode */
+void TC2_CompareInitialize( void )
 {
     /* Reset TC */
     TC2_REGS->COUNT32.TC_CTRLA = TC_CTRLA_SWRST_Msk;
@@ -85,19 +84,21 @@ void TC2_TimerInitialize( void )
     /* Configure counter mode & prescaler */
     TC2_REGS->COUNT32.TC_CTRLA = TC_CTRLA_MODE_COUNT32 | TC_CTRLA_PRESCALER_DIV64 | TC_CTRLA_PRESCSYNC_PRESC ;
 
-    /* Configure in Match Frequency Mode */
-    TC2_REGS->COUNT32.TC_WAVE = (uint8_t)TC_WAVE_WAVEGEN_MPWM;
+    /* Configure waveform generation mode */
+    TC2_REGS->COUNT32.TC_WAVE = (uint8_t)TC_WAVE_WAVEGEN_NFRQ;
 
-    /* Configure timer period */
-    TC2_REGS->COUNT32.TC_CC[0U] = 312U;
+    /* Configure timer one shot mode & direction */
+    TC2_REGS->COUNT32.TC_CTRLBSET = (uint8_t)(TC_CTRLBSET_LUPD_Msk);
+
+    TC2_REGS->COUNT32.TC_CC[0] = 1000U;
+    TC2_REGS->COUNT32.TC_CC[1] = 24U;
 
     /* Clear all interrupt flags */
     TC2_REGS->COUNT32.TC_INTFLAG = (uint8_t)TC_INTFLAG_Msk;
 
+    /* Enable period Interrupt */
     TC2_CallbackObject.callback = NULL;
-    /* Enable interrupt*/
-    TC2_REGS->COUNT32.TC_INTENSET = (uint8_t)(TC_INTENSET_OVF_Msk);
-
+    TC2_REGS->COUNT32.TC_INTENSET = (uint8_t)(TC_INTENSET_MC0_Msk);
 
     while((TC2_REGS->COUNT32.TC_SYNCBUSY) != 0U)
     {
@@ -105,8 +106,8 @@ void TC2_TimerInitialize( void )
     }
 }
 
-/* Enable the TC counter */
-void TC2_TimerStart( void )
+/* Enable the counter */
+void TC2_CompareStart( void )
 {
     TC2_REGS->COUNT32.TC_CTRLA |= TC_CTRLA_ENABLE_Msk;
     while((TC2_REGS->COUNT32.TC_SYNCBUSY & TC_SYNCBUSY_ENABLE_Msk) == TC_SYNCBUSY_ENABLE_Msk)
@@ -115,8 +116,8 @@ void TC2_TimerStart( void )
     }
 }
 
-/* Disable the TC counter */
-void TC2_TimerStop( void )
+/* Disable the counter */
+void TC2_CompareStop( void )
 {
     TC2_REGS->COUNT32.TC_CTRLA &= ~TC_CTRLA_ENABLE_Msk;
     while((TC2_REGS->COUNT32.TC_SYNCBUSY & TC_SYNCBUSY_ENABLE_Msk) == TC_SYNCBUSY_ENABLE_Msk)
@@ -125,12 +126,12 @@ void TC2_TimerStop( void )
     }
 }
 
-uint32_t TC2_TimerFrequencyGet( void )
+uint32_t TC2_CompareFrequencyGet( void )
 {
-    return (uint32_t)(312500U);
+    return (uint32_t)(0UL);
 }
 
-void TC2_TimerCommandSet(TC_COMMAND command)
+void TC2_CompareCommandSet(TC_COMMAND command)
 {
     TC2_REGS->COUNT32.TC_CTRLBSET = (uint8_t)((uint32_t)command << TC_CTRLBSET_CMD_Pos);
     while((TC2_REGS->COUNT32.TC_SYNCBUSY) != 0U)
@@ -139,8 +140,8 @@ void TC2_TimerCommandSet(TC_COMMAND command)
     }    
 }
 
-/* Get the current timer counter value */
-uint32_t TC2_Timer32bitCounterGet( void )
+/* Get the current counter value */
+uint32_t TC2_Compare32bitCounterGet( void )
 {
     /* Write command to force COUNT register read synchronization */
     TC2_REGS->COUNT32.TC_CTRLBSET |= (uint8_t)TC_CTRLBSET_CMD_READSYNC;
@@ -154,14 +155,13 @@ uint32_t TC2_Timer32bitCounterGet( void )
     {
         /* Wait for CMD to become zero */
     }
-    
+
     /* Read current count value */
     return TC2_REGS->COUNT32.TC_COUNT;
-
 }
 
-/* Configure timer counter value */
-void TC2_Timer32bitCounterSet( uint32_t count )
+/* Configure counter value */
+void TC2_Compare32bitCounterSet( uint32_t count )
 {
     TC2_REGS->COUNT32.TC_COUNT = count;
 
@@ -171,42 +171,63 @@ void TC2_Timer32bitCounterSet( uint32_t count )
     }
 }
 
-/* Configure timer period */
-void TC2_Timer32bitPeriodSet( uint32_t period )
+/* Read period value */
+uint32_t TC2_Compare32bitPeriodGet( void )
 {
-    TC2_REGS->COUNT32.TC_CC[0] = period;
+    /* Get period value */
+    return 0xFFFFFFFFU;
+}
+
+
+/* Configure duty cycle value */
+bool TC2_Compare32bitMatch0Set( uint32_t compareValue )
+{
+    bool status = false;
+    /* Set new compare value for compare channel 0 */
+    TC2_REGS->COUNT32.TC_CC[0] = compareValue;
     while((TC2_REGS->COUNT32.TC_SYNCBUSY & TC_SYNCBUSY_CC0_Msk) == TC_SYNCBUSY_CC0_Msk)
     {
         /* Wait for Write Synchronization */
-    }
+    } 
+    status = true;   
+    return status;
 }
 
-/* Read the timer period value */
-uint32_t TC2_Timer32bitPeriodGet( void )
+/* Configure duty cycle value */
+bool TC2_Compare32bitMatch1Set( uint32_t compareValue )
 {
-    return TC2_REGS->COUNT32.TC_CC[0];
+    bool status = false;
+    /* Set new compare value for compare channel 1 */
+    TC2_REGS->COUNT32.TC_CC[1] = compareValue;
+    while((TC2_REGS->COUNT32.TC_SYNCBUSY & TC_SYNCBUSY_CC1_Msk) == TC_SYNCBUSY_CC1_Msk)
+    {
+        /* Wait for Write Synchronization */
+    }
+    status = true;    
+    return status;
 }
+
 
 
 
 /* Register callback function */
-void TC2_TimerCallbackRegister( TC_TIMER_CALLBACK callback, uintptr_t context )
+void TC2_CompareCallbackRegister( TC_COMPARE_CALLBACK callback, uintptr_t context )
 {
     TC2_CallbackObject.callback = callback;
 
     TC2_CallbackObject.context = context;
 }
 
-/* Timer Interrupt handler */
-void TC2_TimerInterruptHandler( void )
+/* Compare match interrupt handler */
+void TC2_CompareInterruptHandler( void )
 {
     if (TC2_REGS->COUNT32.TC_INTENSET != 0U)
     {
-        TC_TIMER_STATUS status;
-        status = (TC_TIMER_STATUS) TC2_REGS->COUNT32.TC_INTFLAG;
-        /* Clear interrupt flags */
+        TC_COMPARE_STATUS status;
+        status = TC2_REGS->COUNT32.TC_INTFLAG;
+        /* clear period interrupt */
         TC2_REGS->COUNT32.TC_INTFLAG = (uint8_t)TC_INTFLAG_Msk;
-        if((status != TC_TIMER_STATUS_NONE) && TC2_CallbackObject.callback != NULL)
+        if((status != TC_COMPARE_STATUS_NONE) && TC2_CallbackObject.callback != NULL)
         {
             TC2_CallbackObject.callback(status, TC2_CallbackObject.context);
         }

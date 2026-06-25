@@ -25,15 +25,41 @@ children:
       children:
       - type: Dynamic
         attributes: {id: tc2, value: TC2_Timer32bitPeriodSet}
+  - type: File
+    attributes: {id: TC_CAPTURE_HEADER}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'false'}
+  - type: File
+    attributes: {id: TC_CAPTURE_SOURCE}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'false'}
   - type: Long
     attributes: {id: TC_COMPARE_CC0}
     children:
     - type: Attributes
       children:
+      - type: String
+        attributes: {id: label}
+        children:
+        - {type: Value, value: Compare 0 Value}
       - type: Long
         attributes: {id: max}
         children:
         - {type: Value, value: '4294967295'}
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1000'}
   - type: Long
     attributes: {id: TC_COMPARE_CC1}
     children:
@@ -42,7 +68,50 @@ children:
       - type: Long
         attributes: {id: max}
         children:
-        - {type: Value, value: '24'}
+        - {type: Value, value: '4294967295'}
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
+  - type: Boolean
+    attributes: {id: TC_COMPARE_CTRLBSET_LUPD}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
+  - type: File
+    attributes: {id: TC_COMPARE_HEADER}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'true'}
+  - type: Boolean
+    attributes: {id: TC_COMPARE_INTENSET_MC0}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'true'}
+  - type: Boolean
+    attributes: {id: TC_COMPARE_INTERRUPT_MODE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: tc2, value: 'true'}
+  - type: Menu
+    attributes: {id: TC_COMPARE_MENU}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
   - type: Long
     attributes: {id: TC_COMPARE_PERIOD}
     children:
@@ -60,7 +129,36 @@ children:
       - type: String
         attributes: {id: text}
         children:
-        - {type: Value, value: '**** Compare Period is 76.8 us ****'}
+        - {type: Value, value: '**** Compare Period is 13743895344.0 us ****'}
+  - type: File
+    attributes: {id: TC_COMPARE_SOURCE}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'true'}
+  - type: Comment
+    attributes: {id: TC_COMPARE_TOP}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Period Value is 0xffffffffL ****'}
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
+  - type: KeyValueSet
+    attributes: {id: TC_COMPARE_WAVE_WAVEGEN}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: TC_CTRLA_MODE}
     children:
@@ -82,6 +180,13 @@ children:
       children:
       - type: Dynamic
         attributes: {id: tc2, value: '312500'}
+  - type: Combo
+    attributes: {id: TC_OPERATION_MODE}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: Compare}
   - type: Comment
     attributes: {id: TC_Resolution}
     children:
@@ -91,6 +196,24 @@ children:
         attributes: {id: text}
         children:
         - {type: Value, value: '****Timer resolution is 3200.0 nS****'}
+  - type: File
+    attributes: {id: TC_TIMER_HEADER}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'false'}
+  - type: Menu
+    attributes: {id: TC_TIMER_MENU}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'false'}
   - type: Long
     attributes: {id: TC_TIMER_PERIOD}
     children:
@@ -98,6 +221,15 @@ children:
       children:
       - type: Dynamic
         attributes: {id: tc2, value: '312'}
+  - type: File
+    attributes: {id: TC_TIMER_SOURCE}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'false'}
   - type: Float
     attributes: {id: TC_TIMER_TIME_MS}
     children:
@@ -122,4 +254,4 @@ children:
       - type: Dynamic
         attributes: {id: tc2, value: '32'}
 - type: ElementPosition
-  attributes: {x: '427', y: '429', id: tc2}
+  attributes: {x: '429', y: '429', id: tc2}

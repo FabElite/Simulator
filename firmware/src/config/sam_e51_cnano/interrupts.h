@@ -68,8 +68,8 @@ void EIC_EXTINT_10_InterruptHandler (void);
 void EIC_EXTINT_11_InterruptHandler (void);
 void EIC_EXTINT_15_InterruptHandler (void);
 void SERCOM5_USART_InterruptHandler (void);
-void TC0_TimerInterruptHandler (void);
-void TC2_TimerInterruptHandler (void);
+void TC0_CompareInterruptHandler (void);
+void TC2_CompareInterruptHandler (void);
 
 
 
